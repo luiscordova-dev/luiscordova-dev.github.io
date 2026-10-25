@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo convierto un video con 20 anuncios en 20 anuncios listos</title>
+<meta name="description" content="Propuesta de Luis Córdova para Mercatitlán: el sistema paso a paso para convertir un video largo de Juan en 20 anuncios listos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ac:#6F00FF;--ac-soft:#F1E8FF;--ink:#131628;--gr:#607179;--bg:#FAF9FD;--card:#fff;--line:#E3DFEE}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Poppins',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;overflow-x:hidden}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding:40px 0 20px}
+.tag{display:inline-block;font-size:12px;font-weight:600;color:var(--ac);background:var(--ac-soft);padding:4px 12px;border-radius:99px;margin-bottom:14px}
+h1{font-size:clamp(24px,5.2vw,38px);line-height:1.18;font-weight:700;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--ac)}
+.sub{color:var(--gr);margin-top:10px;font-size:15px}
+.case{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:22px;font-size:14px}
+.case b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ac);margin-bottom:4px}
+.case p+p{margin-top:12px}
+.case p{color:var(--gr)} .case p span{color:var(--ink)}
+.hint{font-size:13px;color:var(--gr);margin:26px 0 14px;display:flex;gap:8px;align-items:center}
+.hint i{width:8px;height:8px;border-radius:50%;background:var(--ac);flex:none}
+/* flujo */
+.flow{position:relative;list-style:none;padding-left:0}
+.rail{position:absolute;left:21px;top:22px;bottom:22px;width:3px;background:var(--line);border-radius:3px}
+.rail-fill{position:absolute;left:0;top:0;width:100%;height:0;background:var(--ac);border-radius:3px}
+.dot{position:absolute;left:-5px;top:0;width:13px;height:13px;border-radius:50%;background:var(--ac);box-shadow:0 0 0 6px rgba(111,0,255,.18);opacity:0}
+.step{position:relative;padding-left:56px;margin-bottom:10px}
+.num{position:absolute;left:0;top:10px;width:44px;height:44px;border-radius:50%;background:var(--card);border:2px solid var(--line);display:grid;place-items:center;font-weight:700;font-size:15px;color:var(--gr);transition:.25s;z-index:1}
+.step.lit .num{border-color:var(--ac);color:var(--ac)}
+.step.open .num{background:var(--ac);border-color:var(--ac);color:#fff}
+.btn{width:100%;text-align:left;font:inherit;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 44px 14px 16px;color:var(--ink);cursor:pointer;position:relative;transition:border-color .2s,box-shadow .2s;min-height:56px}
+.btn:hover,.btn:focus-visible{border-color:var(--ac)}
+.btn:focus-visible{outline:3px solid rgba(111,0,255,.35);outline-offset:2px}
+.step.open .btn{border-color:var(--ac);box-shadow:0 6px 24px rgba(111,0,255,.12)}
+.btn h2{font-size:15px;font-weight:600;line-height:1.3}
+.btn small{display:block;color:var(--gr);font-size:12.5px;margin-top:2px}
+.btn::after{content:"";position:absolute;right:18px;top:50%;width:8px;height:8px;border-right:2px solid var(--ac);border-bottom:2px solid var(--ac);transform:translateY(-70%) rotate(45deg);transition:transform .25s}
+.step.open .btn::after{transform:translateY(-30%) rotate(-135deg)}
+.det{height:0;overflow:hidden}
+.det-in{padding:14px 4px 6px}
+.row{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:8px;font-size:13.5px}
+.row b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ac);margin-bottom:2px}
+.row.fail{background:var(--ac-soft);border-color:#DCC7FF}
+.row.fail b{color:var(--ink)}
+.out{margin:22px 0 8px;background:var(--ink);color:#fff;border-radius:14px;padding:18px 16px;font-size:14px}
+.out strong{color:#CFA8FF}
+footer{padding:30px 0 40px;text-align:center;color:var(--gr);font-size:13px}
+footer a{color:var(--ac);text-decoration:none}
+@media(min-width:900px){
+  .wrap{max-width:820px}
+  header{padding-top:64px}
+  .btn h2{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="tag">Propuesta para la vacante</span>
+  <h1>Cómo convierto un video con 20 anuncios en <em>20 anuncios listos</em></h1>
+  <p class="sub">Propuesta de Luis Córdova para Mercatitlán</p>
+  <div class="case">
+    <p><b>El caso</b><span>Un video largo donde Juan recita 20 anuncios seguidos, con el guión de cada uno. Cada anuncio debe quedar como un video aparte, con un efecto visual hecho con IA, guardado en una carpeta.</span></p>
+    <p><b>Mi respuesta</b>Lo armo con Claude Code. Transcribo con tiempos por palabra y comparo cada guion con la transcripción para cortar exacto; si Juan repite una toma, uso la mejor. Con ffmpeg corto los 20, quito silencios, nivelo audio, los paso a vertical y les pongo subtítulos. De efecto, recorto a Juan del fondo y meto animaciones con IA detrás. Una revisión automática checa todo y los deja en una carpeta de Drive para aprobar.</p>
+  </div>
+  <p class="hint"><i></i>Este es el recorrido completo. Toca cada paso para ver el detalle.</p>
+</header>
+
+<main>
+<ol class="flow" id="flow">
+  <div class="rail" aria-hidden="true"><div class="rail-fill" id="fill"></div><div class="dot" id="dot"></div></div>
+</ol>
+
+<div class="out">
+  <strong>Resultado:</strong> una carpeta con los 20 anuncios, cada uno con su nombre, listos para que los revises y apruebes. Lo que la revisión automática no pudo confirmar llega marcado, para que una persona lo mire.
+</div>
+</main>
+
+<footer>Luis Córdova · <a href="https://github.com/luiscordova-dev">github.com/luiscordova-dev</a></footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+var STEPS=[
+{t:"Entrada",s:"El video largo de Juan y los 20 guiones",
+ q:"Reúno el video completo de Juan y los 20 guiones en una sola carpeta de trabajo. Cada guion se numera para que cada anuncio tenga identidad desde el inicio.",
+ h:"Google Drive (entrada) y Claude Code para ordenar los archivos.",
+ r:"Que estén los 20 guiones, que el video abra bien y que el audio se escuche.",
+ f:"Si falta un guion o el archivo viene dañado, lo aviso de entrada y pido el faltante antes de seguir."},
+{t:"Transcripción con tiempos por palabra",s:"Saber en qué segundo dijo Juan cada palabra",
+ q:"Convierto el audio del video en texto, y cada palabra queda con su segundo exacto de inicio y fin. Es el mapa que permite cortar con precisión.",
+ h:"Whisper o AssemblyAI.",
+ r:"Que la transcripción cubra todo el video, sin huecos largos sin texto.",
+ f:"Si un tramo sale confuso, lo vuelvo a transcribir con otro servicio o lo marco para escucharlo."},
+{t:"Alinear cada guion con la transcripción",s:"Encontrar dónde empieza y termina cada anuncio",
+ q:"Comparo el texto de cada guion con lo que Juan realmente dijo y ubico su inicio y fin. Si Juan repite una toma, comparo las versiones y elijo la mejor: la más completa y fluida.",
+ h:"Claude Code (comparación de textos tolerante a errores de dicción).",
+ r:"Que cada guion tenga un tramo asignado y que ningún anuncio se cruce con otro.",
+ f:"Si un guion no aparece en el video, lo marco y te aviso, en vez de inventar un corte."},
+{t:"Corte exacto de los 20",s:"Cada anuncio, en su propio archivo",
+ q:"Corto el video en 20 archivos usando los tiempos del paso anterior, con un pequeño margen para no comerme la primera ni la última palabra.",
+ h:"ffmpeg, recodificando el video. No uso -c copy porque ese modo salta al keyframe más cercano y el corte queda desfasado.",
+ r:"Que cada clip empiece y termine en la palabra correcta, sin cortes a media sílaba.",
+ f:"Si un corte queda desfasado, ajusto el margen y lo repito solo para ese anuncio."},
+{t:"Limpieza de audio y silencios",s:"Que se escuche limpio y sin pausas muertas",
+ q:"Quito silencios largos y muletillas, y nivelo el volumen para que los 20 suenen parejos entre sí.",
+ h:"ffmpeg (detección de silencio y normalización de volumen) apoyado en las marcas de tiempo de la transcripción.",
+ r:"Que no se corten palabras al quitar pausas y que el volumen sea parecido entre anuncios.",
+ f:"Si una limpieza se come una palabra, uso una versión más suave para ese anuncio."},
+{t:"Formato vertical",s:"9:16, y también 4:5 y 1:1",
+ q:"Paso cada anuncio a vertical 9:16 siguiendo la cara de Juan para que siempre quede centrado. También saco 4:5 y 1:1 para otros espacios de publicidad.",
+ h:"ffmpeg con detección de rostro.",
+ r:"Que la cara no se salga del cuadro y que no quede cortada la cabeza.",
+ f:"Si el seguimiento de cara falla en un tramo, lo fijo manualmente o lo marco para revisar."},
+{t:"Subtítulos, zooms, música y sonido",s:"Lo que mantiene la atención",
+ q:"Subtítulos palabra por palabra (aprovechando los tiempos del paso 2), zooms suaves en las frases clave, música de fondo y efectos de sonido.",
+ h:"Generación de subtítulos y edición programática (HyperFrames o Remotion), más ffmpeg.",
+ r:"Que el texto coincida con el guion y que la música no tape la voz.",
+ f:"Si un subtítulo no coincide con el guion, se corrige con el texto del guion y se vuelve a generar."},
+{t:"Efecto visual con IA",s:"Juan al frente, animaciones con IA detrás",
+ q:"Recorto a Juan del fondo y pongo detrás animaciones generadas con IA. Puede ser video generado por modelos de IA, o animación hecha en código con la marca de Mercatitlán (colores, tipografía, logo).",
+ h:"Kie.ai o Higgsfield para fondos generados con IA; HyperFrames o Remotion para animación en código con la marca.",
+ r:"Que el recorte de Juan no tenga bordes raros, que el fondo no distraiga y que respete la marca.",
+ f:"Si el recorte o el fondo quedan mal, regenero ese anuncio con otro fondo o cambio a animación en código."},
+{t:"Revisión automática de calidad",s:"Todo se revisa antes de que lo veas",
+ q:"Reviso cada anuncio: audio, subtítulos contra el guion, encuadre y duración. Lo que pasa se queda; lo que no, se corrige.",
+ h:"Claude Code con scripts de verificación (audio, comparación de texto, detección de rostro, duración).",
+ r:"Que el audio no se clipee, que los subtítulos coincidan con el guion, que Juan esté encuadrado y que la duración sea la esperada.",
+ f:"Lo que falla se reintenta automáticamente; si sigue fallando, se marca para revisión humana con el motivo."},
+{t:"Salida",s:"20 anuncios en una carpeta de Drive",
+ q:"Los 20 anuncios quedan en una carpeta de Drive, con un nombre claro por anuncio y listos para aprobar. Opcional: subirlos a Meta como anuncios mediante su API.",
+ h:"Google Drive y, si lo piden, la API de Meta.",
+ r:"Que estén los 20, con nombres correctos y sin archivos repetidos.",
+ f:"Si falta alguno, la carpeta incluye una nota con cuáles faltan y por qué."}
+];
+var flow=document.getElementById('flow'),nodes=[];
+STEPS.forEach(function(d,i){
+  var li=document.createElement('li');li.className='step';
+  li.innerHTML='<span class="num">'+(i+1)+'</span>'+
+  '<button class="btn" aria-expanded="false" aria-controls="d'+i+'"><h2>'+d.t+'</h2><small>'+d.s+'</small></button>'+
+  '<div class="det" id="d'+i+'" role="region"><div class="det-in">'+
+  '<div class="row"><b>Qué hace</b>'+d.q+'</div>'+
+  '<div class="row"><b>Con qué herramienta</b>'+d.h+'</div>'+
+  '<div class="row"><b>Qué revisa</b>'+d.r+'</div>'+
+  '<div class="row fail"><b>Si falla</b>'+d.f+'</div></div></div>';
+  flow.appendChild(li);nodes.push(li);
+});
+var RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var hasG=typeof gsap!=='undefined';
+function setOpen(li,open,animate){
+  var det=li.querySelector('.det'),b=li.querySelector('.btn');
+  li.classList.toggle('open',open);b.setAttribute('aria-expanded',open);
+  if(open)li.classList.add('lit');
+  var target=open?det.firstChild.offsetHeight:0;
+  if(hasG&&animate&&!RM){gsap.to(det,{height:target,duration:.35,ease:'power2.out',onComplete:function(){if(open)det.style.height='auto'}});}
+  else det.style.height=open?'auto':'0px';
+  setTimeout(syncFill,animate&&!RM?400:0);
+}
+nodes.forEach(function(li){
+  li.querySelector('.btn').addEventListener('click',function(){
+    var was=li.classList.contains('open');
+    nodes.forEach(function(o){if(o!==li&&o.classList.contains('open'))setOpen(o,false,true)});
+    setOpen(li,!was,true);
+    if(!was&&hasG&&!RM)gsap.fromTo(li.querySelector('.num'),{scale:1.25},{scale:1,duration:.4,ease:'back.out(3)'});
+  });
+});
+var fill=document.getElementById('fill'),rail=fill.parentNode,dot=document.getElementById('dot');
+function numY(i){return nodes[i].offsetTop+32-rail.offsetTop}
+function syncFill(){
+  if(window.__playing)return;
+  var last=-1;nodes.forEach(function(n,i){if(n.classList.contains('lit'))last=i});
+  fill.style.height=(last<0?0:numY(last))+'px';
+}
+window.addEventListener('resize',function(){nodes.forEach(function(n){var d=n.querySelector('.det');if(n.classList.contains('open'))d.style.height='auto'});syncFill()});
+// Recorrido de carga
+function intro(){
+  if(!hasG||RM){nodes.forEach(function(n){n.classList.add('lit')});window.__playing=false;fill.style.height=numY(nodes.length-1)+'px';return}
+  window.__playing=true;
+  gsap.set(nodes,{opacity:0,y:18});gsap.set(dot,{opacity:1,y:numY(0)-6});
+  var tl=gsap.timeline({onComplete:function(){window.__playing=false;gsap.to(dot,{opacity:0,duration:.4});}});
+  nodes.forEach(function(n,i){
+    var y=numY(i);
+    tl.to(fill,{height:y,duration:.28,ease:'none'},i*.28)
+      .to(dot,{y:y-6,duration:.28,ease:'none'},i*.28)
+      .to(n,{opacity:1,y:0,duration:.35,ease:'power2.out'},i*.28)
+      .add(function(){n.classList.add('lit')},i*.28+.1);
+  });
+}
+function start(){
+  // posiciones listas tras cargar fuentes
+  intro();
+  // abre el paso 3 como invitación
+  setTimeout(function(){setOpen(nodes[2],true,true)},RM||!hasG?0:nodes.length*280+500);
+}
+(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(start);
+</script>
+</body>
+</html>
