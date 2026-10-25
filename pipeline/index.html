@@ -317,40 +317,40 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
 
     <li class="nd t-auto" data-id="cc">
       <button class="nb" type="button"><span class="tt">Claude Code</span><span class="chips" aria-hidden="true"><span class="chip" data-o="sub">20 subagentes en paralelo</span><span class="chip" data-o="skills">skills</span><span class="chip" data-o="hooks">hooks</span></span><span class="sm">En local: un subagente por anuncio, los 20 a la vez.</span></button>
-      <div class="more"><p>Claude Code corre en mi computadora y dirige cada paso de abajo. Cada anuncio lo trabaja su propio subagente; si uno falla, los otros 19 siguen.</p><span class="h">Herramientas</span><div class="tools"><span class="tool k">Claude Code</span><span class="tool">subagentes</span><span class="tool s">edit (vibe-editing)</span><span class="tool s">render (vibe-editing)</span><span class="tool">hooks</span></div></div>
+      <div class="more"><p>Claude Code corre en mi computadora y dirige cada paso de abajo. Cada anuncio lo trabaja su propio subagente; si uno falla, los otros 19 siguen.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Claude Code</span><span class="tool">subagentes en paralelo</span><span class="tool">skills de edición propias</span><span class="tool">hooks</span></div></div>
     </li>
 
     <li class="nd t-video" data-id="s1">
       <button class="nb" type="button"><span class="row"><span class="no">1</span><span class="tg">Video aparte</span><span class="cnt"></span></span><span class="tt">Transcribo con tiempos por palabra</span><span class="mini" aria-hidden="true"></span></button>
-      <div class="more"><p>Saco todo lo que dice Juan con el segundo exacto de cada palabra, y ubico dónde está cada uno de los 20 guiones.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Parakeet (hyperframes transcribe)</span><span class="tool">Whisper local</span></div><p><span class="h">Si falla</span>Si Parakeet falla, entra Whisper. Si un guion no aparece, lo aviso antes de cortar nada.</p></div>
+      <div class="more"><p>Saco todo lo que dice Juan con el segundo exacto de cada palabra, y ubico dónde está cada uno de los 20 guiones.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Transcripción con tiempos por palabra (Parakeet / Whisper, local)</span></div><p><span class="h">Si falla</span>Si Parakeet falla, entra Whisper. Si un guion no aparece, lo aviso antes de cortar nada.</p></div>
     </li>
     <li class="nd t-video" data-id="s2">
       <button class="nb" type="button"><span class="row"><span class="no">2</span><span class="tg">Video aparte</span><span class="cnt"></span></span><span class="tt">Comparo cada guion y uso la mejor toma</span></button>
-      <div class="more"><p>script-cut alinea cada guion con el audio palabra por palabra para saber dónde empieza y dónde acaba. Si Juan repite una toma, watch con Gemini ve las dos y uso la mejor.</p><span class="h">Herramientas</span><div class="tools"><span class="tool s">script-cut</span><span class="tool s">watch (Gemini ve el video completo)</span></div><p><span class="h">Si falla</span>Si un guion no se encuentra completo, ese anuncio se marca. No se adivina dónde empieza.</p></div>
+      <div class="more"><p>Alineo cada guion con el audio palabra por palabra para saber dónde empieza y dónde acaba. Si Juan repite una toma, watch con Gemini ve las dos y uso la mejor.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Alinear cada guion con el audio, palabra por palabra</span><span class="tool">Gemini ve el video completo y elige la mejor toma</span></div><p><span class="h">Si falla</span>Si un guion no se encuentra completo, ese anuncio se marca. No se adivina dónde empieza.</p></div>
     </li>
     <li class="nd t-video" data-id="s3">
       <button class="nb" type="button"><span class="row"><span class="no">3</span><span class="tg">Video aparte</span><span class="cnt"></span></span><span class="tt">Corto los 20</span><span class="sm">Uno por archivo</span></button>
-      <div class="more"><p>Corto cada anuncio en su propio archivo, exacto en la primera y la última palabra.</p><span class="h">Herramientas</span><div class="tools"><span class="tool s">render (etapa de corte)</span><span class="tool">ffmpeg</span></div><p><span class="h">Ojo</span>Se recodifica en vez de usar <span class="mono">-c copy</span>, que salta al keyframe y mueve el corte.</p></div>
+      <div class="more"><p>Corto cada anuncio en su propio archivo, exacto en la primera y la última palabra.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Corte exacto con ffmpeg</span></div><p><span class="h">Ojo</span>Se recodifica en vez de usar <span class="mono">-c copy</span>, que salta al keyframe y mueve el corte.</p></div>
     </li>
     <li class="nd t-video" data-id="s4">
       <button class="nb" type="button"><span class="row"><span class="no">4</span><span class="tg">Video aparte</span><span class="cnt"></span></span><span class="tt">Quito silencios y nivelo el audio</span></button>
-      <div class="more"><p>Quito silencios largos y muletillas, y nivelo el audio para que los 20 suenen al mismo volumen.</p><span class="h">Herramientas</span><div class="tools"><span class="tool s">script-cut (quita silencios y muletillas)</span><span class="tool s">render (loudnorm)</span><span class="tool">ffmpeg</span></div><p><span class="h">Si falla</span>Si un corte de silencio se come una palabra, dejo la pausa original.</p></div>
+      <div class="more"><p>Quito silencios largos y muletillas, y nivelo el audio para que los 20 suenen al mismo volumen.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Quitar silencios y muletillas</span><span class="tool">Nivelar el audio (loudnorm)</span><span class="tool">ffmpeg</span></div><p><span class="h">Si falla</span>Si un corte de silencio se come una palabra, dejo la pausa original.</p></div>
     </li>
     <li class="nd t-video" data-id="s5">
       <button class="nb" type="button"><span class="row"><span class="no">5</span><span class="tg">Video aparte</span><span class="cnt"></span></span><span class="tt">Paso a vertical y pongo subtítulos</span></button>
-      <div class="more"><p>Paso cada anuncio a 9:16 siguiendo la cara de Juan y le pongo subtítulos palabra por palabra.</p><span class="h">Herramientas</span><div class="tools"><span class="tool s">reframe-916 (sigue la cara)</span><span class="tool s">embedded-captions</span><span class="tool s">captions-overlay</span></div><p><span class="h">Si falla</span>Si la cara se sale de cuadro, ese tramo va con encuadre fijo centrado.</p></div>
+      <div class="more"><p>Paso cada anuncio a 9:16 siguiendo la cara de Juan y le pongo subtítulos palabra por palabra.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Vertical 9:16 siguiendo la cara</span><span class="tool">Subtítulos palabra por palabra</span></div><p><span class="h">Si falla</span>Si la cara se sale de cuadro, ese tramo va con encuadre fijo centrado.</p></div>
     </li>
     <li class="nd t-fx" data-id="s6">
       <button class="nb" type="button"><span class="row"><span class="no">6</span><span class="tg">Efecto con IA</span><span class="cnt"></span></span><span class="tt">La IA recorta a Juan del fondo</span></button>
-      <div class="more"><p>La IA separa a Juan del fondo en cada cuadro (segmentación de persona, modelo u2net_human_seg) y deja a Juan con fondo transparente.</p><span class="h">Herramientas</span><div class="tools"><span class="tool s">media-use: hyperframes remove-background</span></div><p><span class="h">Qué revisa</span>Que el borde del recorte quede limpio.</p></div>
+      <div class="more"><p>La IA separa a Juan del fondo en cada cuadro (segmentación de persona, modelo u2net_human_seg) y deja a Juan con fondo transparente.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Recorte de persona con IA (fondo transparente)</span></div><p><span class="h">Qué revisa</span>Que el borde del recorte quede limpio.</p></div>
     </li>
     <li class="nd t-fx" data-id="s7">
       <button class="nb" type="button"><span class="row"><span class="no">7</span><span class="tg">Efecto con IA</span><span class="cnt"></span></span><span class="tt">Detrás, animaciones hechas con código</span></button>
-      <div class="more"><p>Detrás de Juan va una animación hecha con código, con la marca de Mercatitlán. Sale igual en los 20.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">HyperFrames</span><span class="tool s">motion-graphics</span><span class="tool s">hyperframes-animation</span></div><p><span class="h">Qué revisa</span>Que la animación no tape la cara ni los subtítulos.</p></div>
+      <div class="more"><p>Detrás de Juan va una animación hecha con código, con la marca de Mercatitlán. Sale igual en los 20.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Motion graphics con código (HyperFrames)</span><span class="tool">Marca de Mercatitlán</span></div><p><span class="h">Qué revisa</span>Que la animación no tape la cara ni los subtítulos.</p></div>
     </li>
     <li class="nd t-save" data-id="s8">
       <button class="nb" type="button"><span class="row"><span class="no">8</span><span class="tg">Guardado</span><span class="cnt"></span></span><span class="tt">Revisión automática checa cada uno</span></button>
-      <div class="more"><p>Cada anuncio pasa por auditorías separadas: imagen, audio, subtítulos contra el guion, encuadre y duración.</p><span class="h">Herramientas</span><div class="tools"><span class="tool s">audit-visual</span><span class="tool s">audit-audio</span><span class="tool s">audit-captions</span><span class="tool s">sf-audit</span><span class="tool k">hooks de Claude Code</span></div><p><span class="h">Si falla</span>El hook bloquea la entrega y el anuncio se rehace solo. Si vuelve a fallar, queda marcado para que una persona lo vea, con la nota de qué falló.</p></div>
+      <div class="more"><p>Cada anuncio pasa por auditorías separadas: imagen, audio, subtítulos contra el guion, encuadre y duración.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Auditoría de imagen</span><span class="tool">Auditoría de audio</span><span class="tool">Subtítulos contra el guion</span><span class="tool">Encuadre y duración</span><span class="tool">hooks de Claude Code</span></div><p><span class="h">Si falla</span>El hook bloquea la entrega y el anuncio se rehace solo. Si vuelve a fallar, queda marcado para que una persona lo vea, con la nota de qué falló.</p></div>
     </li>
     <li class="nd t-save" data-id="out">
       <button class="nb" type="button"><span class="row"><span class="no">9</span><span class="tg">Guardado</span><span class="cnt"></span></span><span class="tt">Carpeta de Drive</span><span class="sm">20 con su nombre</span><span class="grid20" aria-hidden="true"></span></button>
@@ -358,7 +358,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
     </li>
     <li class="nd t-auto" data-id="meta">
       <button class="nb" type="button"><span class="row"><span class="tg">Opcional</span></span><span class="tt">Subirlos a Meta en pausa</span></button>
-      <div class="more"><p>Opcional: subirlos a Meta como anuncios en pausa.</p><span class="h">Herramientas</span><div class="tools"><span class="tool s">meta-ads (Meta Ads CLI)</span></div></div>
+      <div class="more"><p>Opcional: subirlos a Meta como anuncios en pausa.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Meta Ads CLI</span></div></div>
     </li>
     <li class="pop" id="pop" aria-hidden="true"></li>
   </ol>
@@ -386,7 +386,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
           <li>Detrás va una animación hecha con código, con la marca de Mercatitlán.</li>
           <li>Se junta todo: fondo, Juan con borde limpio y subtítulos encima.</li>
         </ol>
-        <div class="tools"><span class="tool s">media-use: hyperframes remove-background</span><span class="tool">HyperFrames</span><span class="tool s">motion-graphics</span></div>
+        <div class="tools"><span class="tool">Recorte de persona con IA</span><span class="tool">Motion graphics con código (HyperFrames)</span></div>
       </div>
       <div>
         <div class="phone">
