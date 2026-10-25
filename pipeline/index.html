@@ -278,6 +278,18 @@ footer a{color:var(--ink);text-decoration-color:var(--violet);text-underline-off
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .scene-code .ln{transform:translateX(-12%)}
 }
+
+.lanes{display:grid;gap:14px;border-top:3px solid var(--ink);padding-top:22px}
+.lane{display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:start;padding:18px 20px;border-radius:16px;background:var(--white);border:1px solid #D5D2E6}
+.lane.auto{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.lane h3{font:800 22px/1.1 var(--display);margin:0}
+.lane .who{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin:0 0 4px}
+.lane.auto .who{color:var(--lilac)}
+.lane ol{margin:0;padding-left:20px;display:grid;gap:6px}
+.lane li b{color:inherit}
+.lane.auto li{color:#E6E3F5}
+.trig{display:inline-block;font-size:13px;padding:4px 10px;border-radius:999px;background:var(--violet);color:#fff;margin-top:8px}
+@media (max-width:720px){.lane{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -405,6 +417,27 @@ footer a{color:var(--ink);text-decoration-color:var(--violet);text-underline-off
         <div class="drive-h"><span class="folder" aria-hidden="true"></span><div><strong>Drive / Anuncios Mercatitlán</strong><small id="driveCount">20 archivos para aprobar</small></div></div>
         <ul class="files" id="files"></ul>
         <p class="drive-note" id="driveNote">Cada archivo es un anuncio terminado, vertical, con subtítulos y efecto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="laneT">
+    <h2 id="laneT">Quién hace qué</h2>
+    <div class="lanes">
+      <div class="lane">
+        <div><p class="who">Equipo Mercatitlán</p><h3>Un solo paso</h3></div>
+        <ol>
+          <li>Suelta el video de Juan y los 20 guiones en una carpeta de <b>Drive</b>.</li>
+          <li>Al final, revisa y aprueba los 20 anuncios.</li>
+        </ol>
+      </div>
+      <div class="lane auto">
+        <div><p class="who">Automatización</p><h3>Todo lo demás</h3><span class="trig">Arranca sola</span></div>
+        <ol>
+          <li>Un <b>webhook</b> avisa en cuanto entra el video a la carpeta y un <b>Cloudflare Worker</b> lanza el proceso. Nadie tiene que darle clic.</li>
+          <li><b>Claude Code</b> transcribe, corta por guion, limpia, encuadra, pule, pone el efecto con IA y revisa los 20.</li>
+          <li>Deja cada anuncio en Drive con su nombre y avisa cuando están listos para aprobar. Si algo falla, lo dice y no lo entrega.</li>
+        </ol>
       </div>
     </div>
   </section>
