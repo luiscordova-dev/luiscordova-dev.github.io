@@ -332,18 +332,18 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
       <div class="more"><p>El equipo deja el video largo de Juan y los 20 guiones en una carpeta de Drive. Es su único paso al principio.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Google Drive</span></div></div>
     </li>
     <li class="nd t-auto" data-id="sy">
-      <button class="nb" type="button"><span class="row"><span class="tg">En mi computadora</span></span><span class="tt">La carpeta se sincroniza</span><span class="sm">Todo corre local</span></button>
-      <div class="more"><p>Esa carpeta de Drive se sincroniza en mi computadora. Ahí Claude Code corre todo el proceso, local; el video no se procesa en la nube.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Google Drive para escritorio</span></div></div>
+      <button class="nb" type="button"><span class="row"><span class="tg">En mi computadora</span></span><span class="tt">La carpeta se sincroniza</span><span class="sm"></span></button>
+      <div class="more"><p>Esa carpeta de Drive se sincroniza en mi computadora. Ahí Claude Code corre todo el proceso.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Google Drive para escritorio</span></div></div>
     </li>
 
     <li class="nd t-auto" data-id="cc">
-      <button class="nb" type="button"><span class="tt">Claude Code</span><span class="chips" aria-hidden="true"><span class="chip" data-o="sub">20 subagentes en paralelo</span><span class="chip" data-o="skills">skills</span><span class="chip" data-o="hooks">hooks</span></span><span class="sm">En local: un subagente por anuncio, los 20 a la vez.</span></button>
+      <button class="nb" type="button"><span class="tt">Claude Code</span><span class="chips" aria-hidden="true"><span class="chip" data-o="sub">20 subagentes en paralelo</span><span class="chip" data-o="skills">skills</span><span class="chip" data-o="hooks">hooks</span></span><span class="sm">Un subagente por anuncio, los 20 a la vez.</span></button>
       <div class="more"><p>Claude Code corre en mi computadora y dirige cada paso de abajo. Cada anuncio lo trabaja su propio subagente; si uno falla, los otros 19 siguen.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Claude Code</span><span class="tool">subagentes en paralelo</span><span class="tool">skills de edición propias</span><span class="tool">hooks</span></div></div>
     </li>
 
     <li class="nd t-video" data-id="s1">
       <button class="nb" type="button"><span class="row"><span class="no">1</span><span class="tg">Video aparte</span><span class="cnt"></span></span><span class="tt">Transcribo con tiempos por palabra</span><span class="mini" aria-hidden="true"></span></button>
-      <div class="more"><p>Saco todo lo que dice Juan con el segundo exacto de cada palabra, y ubico dónde está cada uno de los 20 guiones.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Transcripción con tiempos por palabra (Parakeet / Whisper, local)</span></div><p><span class="h">Si falla</span>Si Parakeet falla, entra Whisper. Si un guion no aparece, lo aviso antes de cortar nada.</p></div>
+      <div class="more"><p>Saco todo lo que dice Juan con el segundo exacto de cada palabra, y ubico dónde está cada uno de los 20 guiones.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Transcripción con tiempos por palabra (Parakeet / Whisper)</span></div><p><span class="h">Si falla</span>Si Parakeet falla, entra Whisper. Si un guion no aparece, lo aviso antes de cortar nada.</p></div>
     </li>
     <li class="nd t-video" data-id="s2">
       <button class="nb" type="button"><span class="row"><span class="no">2</span><span class="tg">Video aparte</span><span class="cnt"></span></span><span class="tt">Comparo cada guion y uso la mejor toma</span></button>
@@ -435,7 +435,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
     <h2 id="laneT">Quién hace qué</h2>
     <div class="lanes">
       <div class="lane"><h3>Equipo Mercatitlán</h3><ul><li>Deja el video de Juan y los 20 guiones en una carpeta de Drive.</li><li>Al final, revisa y aprueba los 20 anuncios.</li></ul></div>
-      <div class="lane auto"><h3>Claude Code, en mi computadora</h3><ul><li>La carpeta de Drive se sincroniza en mi computadora y ahí corre todo, local.</li><li>Claude Code hace los pasos 1 a 8 con los 20 al mismo tiempo.</li><li>Guarda cada anuncio con su nombre en la carpeta de Drive para aprobar. Si algo falla, lo dice y no lo entrega.</li></ul></div>
+      <div class="lane auto"><h3>Claude Code, en mi computadora</h3><ul><li>La carpeta de Drive se sincroniza en mi computadora.</li><li>Claude Code hace los pasos 1 a 8 con los 20 al mismo tiempo.</li><li>Guarda cada anuncio con su nombre en la carpeta de Drive para aprobar. Si algo falla, lo dice y no lo entrega.</li></ul></div>
     </div>
   </section>
 
@@ -605,7 +605,7 @@ document.addEventListener('DOMContentLoaded', function(){
     R.file={}; R.clips=[]; for(var k=0;k<20;k++) R.clips.push({k:k,sch:schedule(k,TS+k*GAP),passed:'s1',red:false});
     var ev=[
       [0,function(){ nodes.in.classList.add('hit','done'); say('El equipo deja el video de Juan y los 20 guiones en la carpeta de Drive.'); }],
-      [600,function(){ say('La carpeta se sincroniza en mi computadora. Todo corre local.'); }],
+      [600,function(){ say('La carpeta se sincroniza en mi computadora.'); }],
       [1300,function(){ nodes.sy.classList.add('done'); hit('sy'); }],
       [1500,function(){ say('<b>Claude Code</b> arranca 20 subagentes en paralelo, uno por anuncio.'); chip('sub',true); chip('skills',true); nodes.cc.classList.add('done'); }],
       [SWEEP0,function(){ say('<b>Paso 1:</b> transcribo con tiempos por palabra y ubico los 20 guiones.'); nodes.s1.classList.add('hit'); }]
