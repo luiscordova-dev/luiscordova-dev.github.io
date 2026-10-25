@@ -3,203 +3,714 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cómo convierto un video con 20 anuncios en 20 anuncios listos</title>
-<meta name="description" content="Propuesta de Luis Córdova para Mercatitlán: el sistema paso a paso para convertir un video largo de Juan en 20 anuncios listos.">
+<title>De 1 video a 20 anuncios</title>
+<meta name="description" content="Cómo Luis Córdova convierte un video largo de Juan con 20 anuncios en 20 videos listos, con efecto de IA, revisados y en una carpeta de Drive.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
 <style>
-:root{--ac:#6F00FF;--ac-soft:#F1E8FF;--ink:#131628;--gr:#607179;--bg:#FAF9FD;--card:#fff;--line:#E3DFEE}
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
-body{font-family:'Poppins',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;overflow-x:hidden}
-.wrap{max-width:760px;margin:0 auto;padding:0 16px}
-header{padding:40px 0 20px}
-.tag{display:inline-block;font-size:12px;font-weight:600;color:var(--ac);background:var(--ac-soft);padding:4px 12px;border-radius:99px;margin-bottom:14px}
-h1{font-size:clamp(24px,5.2vw,38px);line-height:1.18;font-weight:700;letter-spacing:-.01em}
-h1 em{font-style:normal;color:var(--ac)}
-.sub{color:var(--gr);margin-top:10px;font-size:15px}
-.case{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:22px;font-size:14px}
-.case b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ac);margin-bottom:4px}
-.case p+p{margin-top:12px}
-.case p{color:var(--gr)} .case p span{color:var(--ink)}
-.hint{font-size:13px;color:var(--gr);margin:26px 0 14px;display:flex;gap:8px;align-items:center}
-.hint i{width:8px;height:8px;border-radius:50%;background:var(--ac);flex:none}
-/* flujo */
-.flow{position:relative;list-style:none;padding-left:0}
-.rail{position:absolute;left:21px;top:22px;bottom:22px;width:3px;background:var(--line);border-radius:3px}
-.rail-fill{position:absolute;left:0;top:0;width:100%;height:0;background:var(--ac);border-radius:3px}
-.dot{position:absolute;left:-5px;top:0;width:13px;height:13px;border-radius:50%;background:var(--ac);box-shadow:0 0 0 6px rgba(111,0,255,.18);opacity:0}
-.step{position:relative;padding-left:56px;margin-bottom:10px}
-.num{position:absolute;left:0;top:10px;width:44px;height:44px;border-radius:50%;background:var(--card);border:2px solid var(--line);display:grid;place-items:center;font-weight:700;font-size:15px;color:var(--gr);transition:.25s;z-index:1}
-.step.lit .num{border-color:var(--ac);color:var(--ac)}
-.step.open .num{background:var(--ac);border-color:var(--ac);color:#fff}
-.btn{width:100%;text-align:left;font:inherit;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 44px 14px 16px;color:var(--ink);cursor:pointer;position:relative;transition:border-color .2s,box-shadow .2s;min-height:56px}
-.btn:hover,.btn:focus-visible{border-color:var(--ac)}
-.btn:focus-visible{outline:3px solid rgba(111,0,255,.35);outline-offset:2px}
-.step.open .btn{border-color:var(--ac);box-shadow:0 6px 24px rgba(111,0,255,.12)}
-.btn h2{font-size:15px;font-weight:600;line-height:1.3}
-.btn small{display:block;color:var(--gr);font-size:12.5px;margin-top:2px}
-.btn::after{content:"";position:absolute;right:18px;top:50%;width:8px;height:8px;border-right:2px solid var(--ac);border-bottom:2px solid var(--ac);transform:translateY(-70%) rotate(45deg);transition:transform .25s}
-.step.open .btn::after{transform:translateY(-30%) rotate(-135deg)}
-.det{height:0;overflow:hidden}
-.det-in{padding:14px 4px 6px}
-.row{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:8px;font-size:13.5px}
-.row b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ac);margin-bottom:2px}
-.row.fail{background:var(--ac-soft);border-color:#DCC7FF}
-.row.fail b{color:var(--ink)}
-.out{margin:22px 0 8px;background:var(--ink);color:#fff;border-radius:14px;padding:18px 16px;font-size:14px}
-.out strong{color:#CFA8FF}
-footer{padding:30px 0 40px;text-align:center;color:var(--gr);font-size:13px}
-footer a{color:var(--ac);text-decoration:none}
-@media(min-width:900px){
-  .wrap{max-width:820px}
-  header{padding-top:64px}
-  .btn h2{font-size:16px}
+:root{
+  --violet:#6F00FF;
+  --violet-2:#8F3DFF;
+  --lilac:#DCCEFF;
+  --ink:#131628;
+  --ink-2:#1D2140;
+  --ink-3:#2A2F55;
+  --slate:#607179;
+  --paper:#F3F2F9;
+  --white:#FFFFFF;
+  --amber:#FFB42E;
+  --ok:#22C38E;
+  --bad:#FF5B4F;
+  --display:"Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --body:"Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme:light;
 }
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--body);overflow-x:clip}
+img,svg{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1240px,100% - 32px);margin-inline:auto}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 0 28px}
+.hero h1{
+  font:800 clamp(44px,8.4vw,118px)/.9 var(--display);
+  font-variation-settings:"opsz" 96;
+  letter-spacing:-.035em;margin:0;max-width:13ch;text-wrap:balance;
+}
+.hero h1 .n{display:inline-block;color:var(--white);background:var(--violet);padding:0 .12em;border-radius:.12em;margin-right:.14em;line-height:1;transform:translateY(-.02em)}
+.hero .sub{font:600 clamp(18px,2vw,22px)/1.3 var(--display);color:var(--slate);margin:22px 0 0}
+.hero-row{display:grid;grid-template-columns:1fr auto;gap:28px 48px;align-items:end;margin-top:36px}
+.answer{margin:0;max-width:62ch;font-size:17px;color:#2E3448;border-left:3px solid var(--violet);padding-left:18px}
+.answer b{font-weight:700;color:var(--ink)}
+.run{
+  --s:1;display:inline-flex;align-items:center;gap:14px;border:0;cursor:pointer;
+  background:var(--violet);color:#fff;font:800 clamp(20px,2.2vw,26px)/1 var(--display);
+  padding:22px 30px 22px 22px;border-radius:999px;box-shadow:0 10px 0 -2px #3D008C, 0 18px 40px -12px rgba(111,0,255,.55);
+  transition:transform .15s, box-shadow .15s, background .2s;white-space:nowrap
+}
+.run .ic{width:42px;height:42px;border-radius:50%;background:#fff;color:var(--violet);display:grid;place-items:center;font-size:18px;padding-left:3px}
+.run:hover{transform:translateY(-2px);background:var(--violet-2)}
+.run:active{transform:translateY(6px);box-shadow:0 4px 0 -2px #3D008C,0 8px 20px -10px rgba(111,0,255,.5)}
+.run[disabled]{cursor:progress;background:#4B1CA0;box-shadow:0 6px 0 -2px #2B0066}
+.run[disabled] .ic{animation:spin 1s linear infinite;padding-left:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- bay (dark editing bay) ---------- */
+.bay{position:relative;background:var(--ink);color:#E9E8F7;border-radius:28px;padding:28px;margin-top:8px;isolation:isolate}
+.bay::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;
+  background:radial-gradient(700px 300px at 85% -10%, rgba(111,0,255,.35), transparent 70%),
+             radial-gradient(500px 260px at -5% 110%, rgba(111,0,255,.18), transparent 70%)}
+.bay-head{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.file{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
+.file .dot{width:10px;height:10px;border-radius:50%;background:var(--bad);box-shadow:0 0 0 4px rgba(255,91,79,.18)}
+.bay.running .file .dot{animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.25}}
+.tc{font:600 15px/1 var(--body);font-variant-numeric:tabular-nums;color:#B9B7D6}
+.tc b{color:#fff;font-weight:700}
+
+.track-wrap{position:relative;padding:6px 0 10px}
+.track{position:relative;display:flex;gap:2px;height:76px;transition:gap .7s cubic-bezier(.6,0,.2,1)}
+.seg{position:relative;flex:var(--d) 1 0;min-width:0;border-radius:6px;background:var(--ink-3);overflow:hidden;transition:background .25s, opacity .5s, transform .5s, filter .5s}
+.seg svg{position:absolute;inset:0;width:100%;height:100%}
+.seg svg path{fill:#5B5F8E;transition:fill .25s}
+.seg .lbl{position:absolute;left:5px;top:4px;font:700 10px/1 var(--body);color:#9C9BC4;font-variant-numeric:tabular-nums}
+.seg.heard{background:#3A2A7A}
+.seg.heard svg path{fill:#B48CFF}
+.seg.take-b::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 6px,rgba(255,180,46,.22) 6px 8px)}
+.seg.take-b.heard svg path{fill:var(--amber)}
+.track.split{gap:10px}
+.seg.drop{opacity:.18;transform:translateY(14px) scale(.9);filter:grayscale(1)}
+.seg.gone{opacity:0}
+.playhead{position:absolute;top:-4px;bottom:4px;left:0;width:2px;background:var(--amber);border-radius:2px;pointer-events:none;opacity:0}
+.playhead::before{content:"";position:absolute;top:-6px;left:-6px;border:7px solid transparent;border-top:9px solid var(--amber)}
+.bay.transcribing .playhead{opacity:1}
+.log{min-height:24px;margin:6px 0 0;font-size:15px;color:#C9C7E6}
+.log b{color:#fff}
+.log .k{color:var(--amber);font-weight:700}
+
+.orq{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 22px;padding:12px 14px;border:1px dashed #3B4070;border-radius:14px}
+.orq > span{font-weight:700;margin-right:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;font:600 13px/1 var(--body);padding:7px 10px;border-radius:8px;background:#262A4D;color:#E3E1FA;white-space:nowrap}
+.chip.hot{background:var(--violet);color:#fff;box-shadow:0 0 0 0 rgba(143,61,255,.7);animation:pulse 1.2s ease-out infinite}
+@keyframes pulse{to{box-shadow:0 0 0 10px rgba(143,61,255,0)}}
+
+/* stations */
+.stations{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px;position:relative}
+.stations::before{content:"";position:absolute;left:4%;right:4%;top:31px;height:2px;background:repeating-linear-gradient(90deg,#3B4070 0 8px,transparent 8px 14px);z-index:0}
+.st{position:relative;z-index:1;width:100%;text-align:left;cursor:pointer;border:1.5px solid #30355F;background:var(--ink-2);border-radius:16px;padding:12px 12px 14px;display:flex;flex-direction:column;gap:8px;min-height:100%;transition:border-color .2s, background .2s, transform .2s}
+.st:hover{border-color:#6A66B0}
+.st .num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#30355F;font:800 14px/1 var(--display);transition:background .2s,color .2s}
+.st .nm{font:600 15px/1.15 var(--display);color:#fff;min-height:2.3em}
+.st .ct{font-size:13px;color:#A6A4C8;font-variant-numeric:tabular-nums}
+.st .ct b{color:#fff;font-size:15px}
+.st[aria-pressed="true"]{border-color:var(--lilac);background:#25295A}
+.st[aria-pressed="true"] .num{background:var(--lilac);color:var(--ink)}
+.st.active{border-color:var(--violet-2);background:#2B1A63;transform:translateY(-3px);box-shadow:0 0 0 4px rgba(111,0,255,.35),0 14px 30px -10px rgba(111,0,255,.6)}
+.st.active .num{background:var(--violet);color:#fff}
+.st.done .num{background:var(--ok);color:var(--ink)}
+.dock{display:grid;grid-template-columns:repeat(5,14px);gap:4px;margin-top:auto}
+.slot{width:14px;height:9px;border-radius:2px;background:#2C3058;transition:background .2s, box-shadow .2s}
+.dock.v .slot{width:8px;height:14px;justify-self:center}
+.slot.on{background:#B48CFF}
+.dock.v .slot.on{background:linear-gradient(#B48CFF 0 70%,#fff 70% 78%,#B48CFF 78%)}
+.dock.fx .slot.on{background:linear-gradient(160deg,var(--violet) 10%,#FF7BD5 60%,var(--amber));box-shadow:0 0 6px rgba(143,61,255,.8)}
+.slot.ok{background:var(--ok)!important;box-shadow:none!important}
+.slot.bad{background:var(--bad)!important;box-shadow:0 0 0 2px rgba(255,91,79,.35)!important}
+.slot.retry{animation:blink .4s steps(2) 4}
+
+.ghost{position:absolute;left:0;top:0;border-radius:3px;background:#B48CFF;z-index:5;pointer-events:none;will-change:transform}
+.ghost.v{background:linear-gradient(#B48CFF 0 70%,#fff 70% 78%,#B48CFF 78%)}
+.ghost.fx{background:linear-gradient(160deg,var(--violet) 10%,#FF7BD5 60%,var(--amber));box-shadow:0 0 10px rgba(143,61,255,.9)}
+.ghost.ok{background:var(--ok)}
+.ghost.bad{background:var(--bad)}
+
+/* lower: detail + drive */
+.lower{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:16px;margin-top:18px}
+.detail{background:var(--paper);color:var(--ink);border-radius:20px;padding:24px 26px;min-height:340px;display:flex;flex-direction:column}
+.panel{margin-bottom:18px}
+.panel h3{font:800 clamp(24px,2.6vw,32px)/1.05 var(--display);letter-spacing:-.02em;margin:0 0 6px;display:flex;align-items:baseline;gap:12px}
+.panel h3 .pn{flex:none;font-size:.6em;width:1.7em;height:1.7em;border-radius:50%;display:grid;place-items:center;background:var(--violet);color:#fff;transform:translateY(-.15em)}
+.panel .what{margin:0 0 16px;max-width:64ch}
+.panel dl{margin:0;display:grid;grid-template-columns:118px 1fr;gap:12px 18px}
+.panel dt{font-weight:700;font-size:14px;color:var(--slate);padding-top:3px}
+.panel dd{margin:0}
+.tools{display:flex;flex-wrap:wrap;gap:6px}
+.tool{font:600 13.5px/1 var(--body);padding:7px 10px;border-radius:8px;background:#fff;border:1.5px solid #D6D2EC;color:var(--ink);white-space:nowrap}
+.tool.k{background:var(--ink);border-color:var(--ink);color:#fff}
+.tool.s{border-color:var(--violet);color:var(--violet)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--slate);margin-top:auto;padding-top:14px;border-top:1px solid #DCD9EC}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;border:1.5px solid #D6D2EC;background:#fff}
+.legend .lk{background:var(--ink);border-color:var(--ink)}
+.legend .ls{border-color:var(--violet)}
+.js .panel[hidden]{display:none}
+html:not(.js) .panel + .panel{margin-top:28px;padding-top:28px;border-top:1px solid #DCD9EC}
+
+.drive{background:#fff;color:var(--ink);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+.drive-h{display:flex;align-items:center;gap:12px}
+.folder{width:46px;height:36px;flex:none;position:relative}
+.folder::before{content:"";position:absolute;left:0;top:0;width:20px;height:10px;border-radius:4px 4px 0 0;background:#B08A1F}
+.folder::after{content:"";position:absolute;inset:6px 0 0;border-radius:3px 6px 6px 6px;background:var(--amber);transition:transform .3s}
+.drive.full .folder::after{transform:skewX(-6deg) translateX(2px)}
+.drive-h strong{font:800 18px/1.1 var(--display);display:block}
+.drive-h small{color:var(--slate);font-size:13.5px;font-variant-numeric:tabular-nums}
+.files{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 10px}
+.files li{display:flex;align-items:center;gap:7px;font:600 13.5px/1.2 var(--body);font-variant-numeric:tabular-nums;padding:5px 6px;border-radius:7px;transition:background .3s, opacity .3s, transform .3s}
+.files li::before{content:"";flex:none;width:9px;height:14px;border-radius:2px;background:linear-gradient(160deg,var(--violet) 10%,#FF7BD5 60%,var(--amber))}
+.js .files li{opacity:.16;transform:translateX(-4px)}
+.js .files li.in{opacity:1;transform:none}
+.files li.flash{background:#EFE7FF}
+.drive-note{font-size:13.5px;color:var(--slate);margin:auto 0 0}
+.drive.full{box-shadow:0 0 0 3px var(--ok)}
+
+/* ---------- effect ---------- */
+section.block{padding:84px 0 0}
+.block h2{font:800 clamp(32px,4.6vw,58px)/.98 var(--display);letter-spacing:-.03em;margin:0 0 14px;max-width:18ch}
+.block .lead{margin:0 0 28px;max-width:60ch;color:#394055}
+.fx-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:center}
+.routes{display:grid;gap:12px}
+.route{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:start;text-align:left;width:100%;border:2px solid #D9D5EE;background:#fff;border-radius:18px;padding:16px 18px;cursor:pointer;transition:border-color .2s, box-shadow .2s}
+.route input{grid-row:span 2;margin:4px 0 0;accent-color:var(--violet);width:18px;height:18px}
+.route strong{font:800 19px/1.2 var(--display)}
+.route span{color:#4A5266;font-size:15px}
+.route .tools{grid-column:2;margin-top:8px}
+.route:has(input:checked){border-color:var(--violet);box-shadow:0 8px 24px -14px rgba(111,0,255,.6)}
+.steps-fx{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:8px;counter-reset:f}
+.steps-fx li{counter-increment:f;display:flex;gap:10px;font-size:15.5px}
+.steps-fx li::before{content:counter(f);flex:none;width:24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:700 12px/1 var(--body);margin-top:1px}
+
+.phone{position:relative;width:300px;aspect-ratio:9/16;border-radius:30px;background:var(--ink);padding:10px;box-shadow:0 30px 60px -24px rgba(19,22,40,.5)}
+.screen{position:relative;width:100%;height:100%;border-radius:22px;overflow:hidden;background:#C8CDD3}
+.layer{position:absolute;inset:0}
+.before{background:linear-gradient(#CDD2D8,#B9BFC6)}
+.before .wall{position:absolute;left:0;right:0;top:62%;height:1px;background:#A9AFB7}
+.after{clip-path:inset(0 0 0 var(--pos,50%));background:#1A0B45;overflow:hidden}
+.scene{position:absolute;inset:0}
+.scene-ai .orb{position:absolute;border-radius:50%;filter:blur(18px);opacity:.9;animation:drift 7s ease-in-out infinite alternate}
+.scene-ai .o1{width:62%;height:36%;left:-10%;top:8%;background:var(--violet)}
+.scene-ai .o2{width:56%;height:32%;right:-14%;top:30%;background:#FF5FCB;animation-duration:9s}
+.scene-ai .o3{width:50%;height:28%;left:18%;top:52%;background:var(--amber);opacity:.6;animation-duration:6s}
+.scene-ai .ring{position:absolute;left:50%;top:34%;width:120%;aspect-ratio:1;border-radius:50%;border:1.5px solid rgba(255,255,255,.25);transform:translate(-50%,-50%) scale(.3);animation:ring 3.6s linear infinite}
+.scene-ai .ring:nth-child(5){animation-delay:-1.2s}
+.scene-ai .ring:nth-child(6){animation-delay:-2.4s}
+@keyframes drift{to{transform:translate(18%,10%) scale(1.15)}}
+@keyframes ring{to{transform:translate(-50%,-50%) scale(1.3);opacity:0}}
+.scene-code{display:none;background:var(--violet)}
+.scene-code .ln{position:absolute;left:0;white-space:nowrap;font:800 46px/1 var(--display);letter-spacing:-.02em;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.55);animation:mq 9s linear infinite}
+.scene-code .ln.f{color:#fff;-webkit-text-stroke:0;opacity:.95}
+.scene-code .ln:nth-child(1){top:6%}
+.scene-code .ln:nth-child(2){top:18%;animation-direction:reverse;animation-duration:11s}
+.scene-code .ln:nth-child(3){top:30%}
+.scene-code .ln:nth-child(4){top:42%;animation-direction:reverse;animation-duration:8s}
+.scene-code .bar{position:absolute;left:0;bottom:0;width:100%;height:30%;background:var(--ink)}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.screen[data-route="code"] .scene-ai{display:none}
+.screen[data-route="code"] .scene-code{display:block}
+.juan{position:absolute;left:50%;bottom:0;width:84%;transform:translateX(-50%)}
+.juan .body{fill:#3B3F55}
+.juan .skin{fill:#C99A7C}
+.juan .hair{fill:#1D1F2C}
+.after .juan{filter:drop-shadow(0 0 0 #fff) drop-shadow(0 0 1.5px #fff) drop-shadow(0 10px 20px rgba(0,0,0,.45))}
+.cap{position:absolute;left:8%;right:8%;bottom:12%;z-index:2;white-space:nowrap;text-align:center;font:800 21px/1.1 var(--display);color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.4)}
+.cap .w{display:inline-block;padding:0 4px;border-radius:5px}
+.cap .w.on{background:var(--amber);color:var(--ink);text-shadow:none}
+.tag{position:absolute;top:12px;font:700 12px/1 var(--body);padding:6px 8px;border-radius:6px;background:rgba(19,22,40,.75);color:#fff;z-index:3}
+.tag.l{left:12px}.tag.r{right:12px;background:var(--amber);color:var(--ink)}
+.handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:3px;margin-left:-1.5px;background:#fff;z-index:4;pointer-events:none;box-shadow:0 0 0 1px rgba(19,22,40,.2)}
+.handle::after{content:"";position:absolute;top:28%;left:50%;width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.35);
+  background-image:linear-gradient(90deg,transparent 11px,var(--ink) 11px 13px,transparent 13px 25px,var(--ink) 25px 27px,transparent 27px)}
+.screen input[type=range]{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:5}
+.screen:has(input:focus-visible){outline:3px solid var(--amber);outline-offset:4px}
+.fx-toggle{display:flex;justify-content:center;gap:6px;margin-top:14px}
+.fx-toggle button{border:1.5px solid #CFCBE6;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px;cursor:pointer}
+.fx-toggle button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* ---------- why ---------- */
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:3px solid var(--ink)}
+.why article{padding:22px 26px 6px 0}
+.why article + article{padding-left:26px;border-left:1px solid #D5D2E6}
+.why h3{font:800 24px/1.1 var(--display);letter-spacing:-.015em;margin:0 0 10px}
+.why p{margin:0;color:#3D4459}
+
+footer{margin-top:96px;padding:28px 0 40px;border-top:1px solid #D5D2E6;font:600 16px/1.4 var(--body);color:var(--slate)}
+footer a{color:var(--ink);text-decoration-color:var(--violet);text-underline-offset:4px;text-decoration-thickness:2px}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .stations{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .stations::before{display:none}
+  .lower{grid-template-columns:1fr}
+}
+@media (max-width:820px){
+  .hero-row{grid-template-columns:1fr}
+  .fx-grid{grid-template-columns:1fr;justify-items:center}
+  .fx-grid > div:first-child{justify-self:stretch}
+  .why{grid-template-columns:1fr}
+  .why article,.why article + article{padding:20px 0;border-left:0}
+  .why article + article{border-top:1px solid #D5D2E6}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .hero{padding:32px 0 20px}
+  .run{width:100%;justify-content:center}
+  .bay{border-radius:22px;padding:16px;margin-inline:-4px}
+  .track{height:58px;gap:1.5px}
+  .track.split{gap:5px}
+  .seg .lbl{display:none}
+  .stations{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .st{padding:10px 10px 12px;border-radius:14px}
+  .st .nm{font-size:14.5px}
+  .orq{gap:6px;padding:10px}
+  .chip{font-size:12px;padding:6px 8px}
+  .detail{padding:20px 16px;border-radius:16px}
+  .panel dl{grid-template-columns:1fr;gap:4px}
+  .panel dd{margin-bottom:12px}
+  .files li{font-size:12.5px;padding:4px}
+  .phone{width:min(280px,100%)}
+  section.block{padding-top:64px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .scene-code .ln{transform:translateX(-12%)}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <span class="tag">Propuesta para la vacante</span>
-  <h1>Cómo convierto un video con 20 anuncios en <em>20 anuncios listos</em></h1>
+
+<header class="hero wrap">
+  <h1>De <span class="n">1</span>video con 20 anuncios a <span class="n">20</span>anuncios listos</h1>
   <p class="sub">Propuesta de Luis Córdova para Mercatitlán</p>
-  <div class="case">
-    <p><b>El caso</b><span>Un video largo donde Juan recita 20 anuncios seguidos, con el guión de cada uno. Cada anuncio debe quedar como un video aparte, con un efecto visual hecho con IA, guardado en una carpeta.</span></p>
-    <p><b>Mi respuesta</b>Lo armo con Claude Code. Transcribo con tiempos por palabra y comparo cada guion con la transcripción para cortar exacto; si Juan repite una toma, uso la mejor. Con ffmpeg corto los 20, quito silencios, nivelo audio, los paso a vertical y les pongo subtítulos. De efecto, recorto a Juan del fondo y meto animaciones con IA detrás. Una revisión automática checa todo y los deja en una carpeta de Drive para aprobar.</p>
+  <div class="hero-row">
+    <p class="answer">Lo armo con <b>Claude Code</b>. Transcribo el video con tiempos por palabra y comparo cada guion con la transcripción para cortar exacto; si Juan repite una toma, uso la mejor. Con <b>ffmpeg</b> corto los 20, quito silencios, nivelo el audio, los paso a vertical y les pongo subtítulos. De efecto, recorto a Juan del fondo y le meto animaciones con IA detrás. Una revisión automática checa todo y los deja en una carpeta de <b>Drive</b> para aprobar.</p>
+    <button class="run" id="runHero" type="button" data-run><span class="ic" aria-hidden="true">▶</span><span class="rl">Correr el sistema</span></button>
   </div>
-  <p class="hint"><i></i>Este es el recorrido completo. Toca cada paso para ver el detalle.</p>
 </header>
 
-<main>
-<ol class="flow" id="flow">
-  <div class="rail" aria-hidden="true"><div class="rail-fill" id="fill"></div><div class="dot" id="dot"></div></div>
-</ol>
+<main class="wrap">
+  <section class="bay" id="bay" aria-label="Simulación del sistema">
+    <div class="bay-head">
+      <div class="file"><span class="dot" aria-hidden="true"></span>juan-20-anuncios.mov</div>
+      <div class="tc"><b id="tcNow">00:00</b> / 14:32</div>
+    </div>
 
-<div class="out">
-  <strong>Resultado:</strong> una carpeta con los 20 anuncios, cada uno con su nombre, listos para que los revises y apruebes. Lo que la revisión automática no pudo confirmar llega marcado, para que una persona lo mire.
-</div>
+    <div class="track-wrap">
+      <div class="track" id="track" aria-hidden="true"></div>
+      <div class="playhead" id="playhead" aria-hidden="true"></div>
+    </div>
+    <p class="log" id="log" aria-live="polite">Un solo video, 20 guiones. Dale a <b>Correr el sistema</b> para ver cómo sale cada anuncio.</p>
+
+    <div class="orq" aria-label="Lo que coordina todo">
+      <span>Todo lo dirige Claude Code:</span>
+      <i class="chip" data-o="skills">skills</i>
+      <i class="chip" data-o="sub">20 subagentes en paralelo</i>
+      <i class="chip" data-o="wf">workflows</i>
+      <i class="chip" data-o="hooks">hooks que bloquean si algo falla</i>
+      <i class="chip" data-o="cron">tareas programadas</i>
+    </div>
+
+    <ol class="stations" id="stations">
+      <li><button class="st" type="button" data-i="0" aria-controls="p0"><span class="num">1</span><span class="nm">Transcribir</span><span class="ct"><b>0</b>/20 guiones ubicados</span><span class="dock"></span></button></li>
+      <li><button class="st" type="button" data-i="1" aria-controls="p1"><span class="num">2</span><span class="nm">Cortar por guion</span><span class="ct"><b>0</b>/20 cortados</span><span class="dock"></span></button></li>
+      <li><button class="st" type="button" data-i="2" aria-controls="p2"><span class="num">3</span><span class="nm">Limpiar</span><span class="ct"><b>0</b>/20 limpios</span><span class="dock"></span></button></li>
+      <li><button class="st" type="button" data-i="3" aria-controls="p3"><span class="num">4</span><span class="nm">Encuadrar</span><span class="ct"><b>0</b>/20 verticales</span><span class="dock v"></span></button></li>
+      <li><button class="st" type="button" data-i="4" aria-controls="p4"><span class="num">5</span><span class="nm">Pulir</span><span class="ct"><b>0</b>/20 pulidos</span><span class="dock v"></span></button></li>
+      <li><button class="st" type="button" data-i="5" aria-controls="p5"><span class="num">6</span><span class="nm">Efecto con IA</span><span class="ct"><b>0</b>/20 con efecto</span><span class="dock v fx"></span></button></li>
+      <li><button class="st" type="button" data-i="6" aria-controls="p6"><span class="num">7</span><span class="nm">Revisión automática</span><span class="ct"><b>0</b>/20 aprobados</span><span class="dock v fx"></span></button></li>
+      <li><button class="st" type="button" data-i="7" aria-controls="p7"><span class="num">8</span><span class="nm">Entregar</span><span class="ct"><b>0</b>/20 en Drive</span><span class="dock v fx"></span></button></li>
+    </ol>
+
+    <div class="lower">
+      <div class="detail" id="detail">
+        <article class="panel" id="p0">
+          <h3><span class="pn">1</span>Transcribir con tiempo por palabra</h3>
+          <p class="what">Saco todo lo que dice Juan con el segundo exacto de cada palabra. Gemini ve el video completo para ubicar dónde se repite una toma y cuál quedó mejor: dicción, energía, si se trabó.</p>
+          <dl>
+            <dt>Herramientas</dt><dd class="tools"><span class="tool">Whisper</span><span class="tool">AssemblyAI</span><span class="tool">Parakeet</span><span class="tool">Gemini (ve el video)</span><span class="tool k">Claude Code</span></dd>
+            <dt>Qué revisa</dt><dd>Que la transcripción cubra el video de principio a fin, sin huecos, y que aparezcan los 20 guiones.</dd>
+            <dt>Si falla</dt><dd>Cambio de motor (AssemblyAI o Whisper) y vuelvo a correr. Si un guion no aparece, lo aviso antes de cortar nada.</dd>
+          </dl>
+        </article>
+        <article class="panel" id="p1">
+          <h3><span class="pn">2</span>Cortar contra el guion</h3>
+          <p class="what">Cada guion se alinea palabra por palabra con la transcripción: el inicio y el final del anuncio salen de ahí, no de un cálculo a ojo. Si Juan lo dijo dos veces, se queda la mejor toma.</p>
+          <dl>
+            <dt>Herramientas</dt><dd class="tools"><span class="tool s">script-cut</span><span class="tool">ffmpeg recodificando</span><span class="tool k">subagentes en paralelo</span></dd>
+            <dt>Qué revisa</dt><dd>Que el texto del corte coincida con el guion completo, sin la primera palabra mocha ni la última cortada. Se recodifica en vez de usar <code>-c copy</code>, que salta al keyframe y mueve el corte.</dd>
+            <dt>Si falla</dt><dd>Si falta una frase o el guion no se encuentra, ese anuncio se marca para revisión. No se adivina dónde empieza.</dd>
+          </dl>
+        </article>
+        <article class="panel" id="p2">
+          <h3><span class="pn">3</span>Limpiar audio y pausas</h3>
+          <p class="what">Quito silencios largos y muletillas, y nivelo el audio para que los 20 suenen al mismo volumen.</p>
+          <dl>
+            <dt>Herramientas</dt><dd class="tools"><span class="tool">ffmpeg silencedetect</span><span class="tool">loudnorm</span><span class="tool">transcripción (muletillas)</span><span class="tool s">audit-audio</span></dd>
+            <dt>Qué revisa</dt><dd>Que no queden saltos que se oigan, clics, ni palabras comidas en los cortes de silencio.</dd>
+            <dt>Si falla</dt><dd>Suavizo ese corte o dejo la pausa original. Mejor una pausa que una palabra mocha.</dd>
+          </dl>
+        </article>
+        <article class="panel" id="p3">
+          <h3><span class="pn">4</span>Encuadrar a vertical</h3>
+          <p class="what">Paso cada anuncio a 9:16 siguiendo la cara de Juan, para que nunca se salga de cuadro. Si hace falta, también salen en 4:5 y 1:1.</p>
+          <dl>
+            <dt>Herramientas</dt><dd class="tools"><span class="tool s">reframe-916</span><span class="tool">OpenCV + detección de cara</span><span class="tool">ffmpeg</span><span class="tool s">horizontal-to-vertical</span></dd>
+            <dt>Qué revisa</dt><dd>Que la cara quede dentro del cuadro todo el tiempo y que el seguimiento no tiemble.</dd>
+            <dt>Si falla</dt><dd>En ese tramo uso un encuadre fijo centrado o lo ajusto a mano.</dd>
+          </dl>
+        </article>
+        <article class="panel" id="p4">
+          <h3><span class="pn">5</span>Pulir</h3>
+          <p class="what">Subtítulos palabra por palabra, zooms automáticos en las frases clave, corrección de color, música y efectos de sonido.</p>
+          <dl>
+            <dt>Herramientas</dt><dd class="tools"><span class="tool s">embedded-captions</span><span class="tool s">captions-overlay</span><span class="tool s">palmier-auto-zooms</span><span class="tool s">palmier-color-grading</span><span class="tool">ElevenLabs (SFX y música)</span></dd>
+            <dt>Qué revisa</dt><dd>Que cada subtítulo diga lo mismo que el guion y que la música quede por debajo de la voz.</dd>
+            <dt>Si falla</dt><dd>Corrijo la palabra o el nivel y vuelvo a renderizar solo ese anuncio.</dd>
+          </dl>
+        </article>
+        <article class="panel" id="p5">
+          <h3><span class="pn">6</span>Efecto con IA</h3>
+          <p class="what">Recorto a Juan del fondo y detrás le meto una animación: generada con IA o hecha en código con la marca de Mercatitlán. Abajo lo puedes comparar.</p>
+          <dl>
+            <dt>Herramientas</dt><dd class="tools"><span class="tool">Kie.ai: Seedance y Kling</span><span class="tool">Higgsfield</span><span class="tool">HyperFrames</span><span class="tool">Remotion</span><span class="tool s">media-use (quitar fondo)</span><span class="tool s">motion-graphics</span></dd>
+            <dt>Qué revisa</dt><dd>Que el borde del recorte quede limpio y que la animación no tape la cara ni los subtítulos.</dd>
+            <dt>Si falla</dt><dd>Regenero el fondo. Si la IA no da algo usable, uso la animación en código, que sale igual cada vez.</dd>
+          </dl>
+        </article>
+        <article class="panel" id="p6">
+          <h3><span class="pn">7</span>Revisión automática</h3>
+          <p class="what">Antes de entregar, cada anuncio pasa por auditorías separadas: imagen, audio, subtítulos contra el guion, encuadre y duración.</p>
+          <dl>
+            <dt>Herramientas</dt><dd class="tools"><span class="tool s">audit-visual</span><span class="tool s">audit-audio</span><span class="tool s">audit-captions</span><span class="tool s">sf-audit</span><span class="tool k">hooks de Claude Code</span></dd>
+            <dt>Qué revisa</dt><dd>Cara en cuadro, audio sin saturar, cada palabra del subtítulo contra el guion y que la duración cuadre con lo que se escribió.</dd>
+            <dt>Si falla</dt><dd>El hook bloquea la entrega. El anuncio se rehace solo; si vuelve a fallar, queda marcado para que una persona lo vea, con la nota de qué falló.</dd>
+          </dl>
+        </article>
+        <article class="panel" id="p7">
+          <h3><span class="pn">8</span>Entregar en Drive</h3>
+          <p class="what">Un archivo por anuncio, con nombre claro, en una carpeta de Drive lista para aprobar. Opcional: subirlos a Meta como anuncios en pausa o programar su publicación.</p>
+          <dl>
+            <dt>Herramientas</dt><dd class="tools"><span class="tool">Google Drive</span><span class="tool">Meta Ads CLI / API (en pausa)</span><span class="tool s">meta-ads</span><span class="tool">Upload-Post</span><span class="tool">Zernio</span></dd>
+            <dt>Qué revisa</dt><dd>Que estén los 20, que cada nombre corresponda a su guion y que todos abran.</dd>
+            <dt>Si falla</dt><dd>Reintento la subida. La carpeta solo se marca lista cuando están los 20.</dd>
+          </dl>
+        </article>
+        <div class="legend" aria-hidden="true"><span><i class="ls"></i>skill que ya uso</span><span><i class="lk"></i>Claude Code</span><span><i></i>herramienta o servicio</span></div>
+      </div>
+
+      <div class="drive" id="drive">
+        <div class="drive-h"><span class="folder" aria-hidden="true"></span><div><strong>Drive / Anuncios Mercatitlán</strong><small id="driveCount">20 archivos para aprobar</small></div></div>
+        <ul class="files" id="files"></ul>
+        <p class="drive-note" id="driveNote">Cada archivo es un anuncio terminado, vertical, con subtítulos y efecto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="fxT">
+    <div class="fx-grid">
+      <div>
+        <h2 id="fxT">El efecto: Juan recortado, animación detrás</h2>
+        <p class="lead">Arrastra la línea del celular para comparar la toma tal cual contra el anuncio terminado. El fondo puede salir de dos lados:</p>
+        <div class="routes" role="radiogroup" aria-label="Tipo de fondo">
+          <label class="route"><input type="radio" name="route" value="ai" checked><strong>Generado con IA</strong><span>Un video de fondo hecho a partir de una instrucción escrita para cada anuncio.</span><span class="tools"><span class="tool">Kie.ai: Seedance</span><span class="tool">Kie.ai: Kling</span><span class="tool">Higgsfield</span></span></label>
+          <label class="route"><input type="radio" name="route" value="code"><strong>Animación en código con la marca</strong><span>Tipografía, colores y movimiento de Mercatitlán; sale igual en los 20.</span><span class="tools"><span class="tool">HyperFrames</span><span class="tool">Remotion</span><span class="tool s">motion-graphics</span></span></label>
+        </div>
+        <ol class="steps-fx">
+          <li>Se separa a Juan del fondo en cada cuadro.</li>
+          <li>Se genera o se anima el fondo nuevo.</li>
+          <li>Se junta todo: fondo, Juan con borde limpio y subtítulos encima.</li>
+        </ol>
+      </div>
+      <div>
+        <div class="phone">
+          <div class="screen" id="screen" data-route="ai" style="--pos:50%">
+            <div class="layer before">
+              <div class="wall"></div>
+              <svg class="juan" viewBox="0 0 200 260" aria-hidden="true"><path class="body" d="M10 260c4-58 34-84 90-84s86 26 90 84z"/><rect class="skin" x="86" y="140" width="28" height="44" rx="10"/><ellipse class="skin" cx="100" cy="104" rx="40" ry="48"/><path class="hair" d="M60 98c-2-38 22-56 42-56 26 0 42 16 40 54-6-16-20-26-40-26-22 0-34 10-42 28z"/></svg>
+              <span class="tag l">Antes</span>
+            </div>
+            <div class="layer after">
+              <div class="scene scene-ai"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span><span class="ring"></span><span class="ring"></span><span class="ring"></span></div>
+              <div class="scene scene-code" aria-hidden="true">
+                <div class="ln">Mercatitlán Mercatitlán Mercatitlán Mercatitlán </div>
+                <div class="ln f">Mercatitlán Mercatitlán Mercatitlán Mercatitlán </div>
+                <div class="ln">Mercatitlán Mercatitlán Mercatitlán Mercatitlán </div>
+                <div class="ln f">Mercatitlán Mercatitlán Mercatitlán Mercatitlán </div>
+              </div>
+              <svg class="juan" viewBox="0 0 200 260" aria-hidden="true"><path class="body" d="M10 260c4-58 34-84 90-84s86 26 90 84z"/><rect class="skin" x="86" y="140" width="28" height="44" rx="10"/><ellipse class="skin" cx="100" cy="104" rx="40" ry="48"/><path class="hair" d="M60 98c-2-38 22-56 42-56 26 0 42 16 40 54-6-16-20-26-40-26-22 0-34 10-42 28z"/></svg>
+              <p class="cap" id="cap" aria-hidden="true"><span class="w on">vende</span> <span class="w">en</span> <span class="w">línea</span></p>
+              <span class="tag r">Después</span>
+            </div>
+            <div class="handle" aria-hidden="true"></div>
+            <input type="range" min="0" max="100" value="50" id="cmp" aria-label="Comparar antes y después">
+          </div>
+        </div>
+        <div class="fx-toggle"><button type="button" data-pos="100" aria-pressed="false">Antes</button><button type="button" data-pos="50" aria-pressed="true">Mitad</button><button type="button" data-pos="0" aria-pressed="false">Después</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="whyT">
+    <h2 id="whyT">Por qué así</h2>
+    <div class="why">
+      <article><h3>Corte exacto contra el guion</h3><p>El inicio y el final de cada anuncio salen de comparar el guion con la transcripción palabra por palabra. Nada de cortar a ojo, y si hay dos tomas se queda la mejor.</p></article>
+      <article><h3>Los 20 en paralelo</h3><p>Cada anuncio lo trabaja su propio subagente, todos al mismo tiempo, en vez de uno detrás de otro. Si uno falla, los otros 19 siguen.</p></article>
+      <article><h3>Nada sale sin revisión</h3><p>Cada video pasa por auditorías de imagen, audio, subtítulos, encuadre y duración. Lo que falla se rehace o se marca para que una persona lo vea antes de que llegue a Drive.</p></article>
+    </div>
+  </section>
 </main>
 
-<footer>Luis Córdova · <a href="https://github.com/luiscordova-dev">github.com/luiscordova-dev</a></footer>
-</div>
+<footer class="wrap">Luis Córdova · <a href="https://github.com/luiscordova-dev">github.com/luiscordova-dev</a></footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script>
-var STEPS=[
-{t:"Entrada",s:"El video largo de Juan y los 20 guiones",
- q:"Reúno el video completo de Juan y los 20 guiones en una sola carpeta de trabajo. Cada guion se numera para que cada anuncio tenga identidad desde el inicio.",
- h:"Google Drive (entrada) y Claude Code para ordenar los archivos.",
- r:"Que estén los 20 guiones, que el video abra bien y que el audio se escuche.",
- f:"Si falta un guion o el archivo viene dañado, lo aviso de entrada y pido el faltante antes de seguir."},
-{t:"Transcripción con tiempos por palabra",s:"Saber en qué segundo dijo Juan cada palabra",
- q:"Convierto el audio del video en texto, y cada palabra queda con su segundo exacto de inicio y fin. Es el mapa que permite cortar con precisión.",
- h:"Whisper o AssemblyAI.",
- r:"Que la transcripción cubra todo el video, sin huecos largos sin texto.",
- f:"Si un tramo sale confuso, lo vuelvo a transcribir con otro servicio o lo marco para escucharlo."},
-{t:"Alinear cada guion con la transcripción",s:"Encontrar dónde empieza y termina cada anuncio",
- q:"Comparo el texto de cada guion con lo que Juan realmente dijo y ubico su inicio y fin. Si Juan repite una toma, comparo las versiones y elijo la mejor: la más completa y fluida.",
- h:"Claude Code (comparación de textos tolerante a errores de dicción).",
- r:"Que cada guion tenga un tramo asignado y que ningún anuncio se cruce con otro.",
- f:"Si un guion no aparece en el video, lo marco y te aviso, en vez de inventar un corte."},
-{t:"Corte exacto de los 20",s:"Cada anuncio, en su propio archivo",
- q:"Corto el video en 20 archivos usando los tiempos del paso anterior, con un pequeño margen para no comerme la primera ni la última palabra.",
- h:"ffmpeg, recodificando el video. No uso -c copy porque ese modo salta al keyframe más cercano y el corte queda desfasado.",
- r:"Que cada clip empiece y termine en la palabra correcta, sin cortes a media sílaba.",
- f:"Si un corte queda desfasado, ajusto el margen y lo repito solo para ese anuncio."},
-{t:"Limpieza de audio y silencios",s:"Que se escuche limpio y sin pausas muertas",
- q:"Quito silencios largos y muletillas, y nivelo el volumen para que los 20 suenen parejos entre sí.",
- h:"ffmpeg (detección de silencio y normalización de volumen) apoyado en las marcas de tiempo de la transcripción.",
- r:"Que no se corten palabras al quitar pausas y que el volumen sea parecido entre anuncios.",
- f:"Si una limpieza se come una palabra, uso una versión más suave para ese anuncio."},
-{t:"Formato vertical",s:"9:16, y también 4:5 y 1:1",
- q:"Paso cada anuncio a vertical 9:16 siguiendo la cara de Juan para que siempre quede centrado. También saco 4:5 y 1:1 para otros espacios de publicidad.",
- h:"ffmpeg con detección de rostro.",
- r:"Que la cara no se salga del cuadro y que no quede cortada la cabeza.",
- f:"Si el seguimiento de cara falla en un tramo, lo fijo manualmente o lo marco para revisar."},
-{t:"Subtítulos, zooms, música y sonido",s:"Lo que mantiene la atención",
- q:"Subtítulos palabra por palabra (aprovechando los tiempos del paso 2), zooms suaves en las frases clave, música de fondo y efectos de sonido.",
- h:"Generación de subtítulos y edición programática (HyperFrames o Remotion), más ffmpeg.",
- r:"Que el texto coincida con el guion y que la música no tape la voz.",
- f:"Si un subtítulo no coincide con el guion, se corrige con el texto del guion y se vuelve a generar."},
-{t:"Efecto visual con IA",s:"Juan al frente, animaciones con IA detrás",
- q:"Recorto a Juan del fondo y pongo detrás animaciones generadas con IA. Puede ser video generado por modelos de IA, o animación hecha en código con la marca de Mercatitlán (colores, tipografía, logo).",
- h:"Kie.ai o Higgsfield para fondos generados con IA; HyperFrames o Remotion para animación en código con la marca.",
- r:"Que el recorte de Juan no tenga bordes raros, que el fondo no distraiga y que respete la marca.",
- f:"Si el recorte o el fondo quedan mal, regenero ese anuncio con otro fondo o cambio a animación en código."},
-{t:"Revisión automática de calidad",s:"Todo se revisa antes de que lo veas",
- q:"Reviso cada anuncio: audio, subtítulos contra el guion, encuadre y duración. Lo que pasa se queda; lo que no, se corrige.",
- h:"Claude Code con scripts de verificación (audio, comparación de texto, detección de rostro, duración).",
- r:"Que el audio no se clipee, que los subtítulos coincidan con el guion, que Juan esté encuadrado y que la duración sea la esperada.",
- f:"Lo que falla se reintenta automáticamente; si sigue fallando, se marca para revisión humana con el motivo."},
-{t:"Salida",s:"20 anuncios en una carpeta de Drive",
- q:"Los 20 anuncios quedan en una carpeta de Drive, con un nombre claro por anuncio y listos para aprobar. Opcional: subirlos a Meta como anuncios mediante su API.",
- h:"Google Drive y, si lo piden, la API de Meta.",
- r:"Que estén los 20, con nombres correctos y sin archivos repetidos.",
- f:"Si falta alguno, la carpeta incluye una nota con cuáles faltan y por qué."}
-];
-var flow=document.getElementById('flow'),nodes=[];
-STEPS.forEach(function(d,i){
-  var li=document.createElement('li');li.className='step';
-  li.innerHTML='<span class="num">'+(i+1)+'</span>'+
-  '<button class="btn" aria-expanded="false" aria-controls="d'+i+'"><h2>'+d.t+'</h2><small>'+d.s+'</small></button>'+
-  '<div class="det" id="d'+i+'" role="region"><div class="det-in">'+
-  '<div class="row"><b>Qué hace</b>'+d.q+'</div>'+
-  '<div class="row"><b>Con qué herramienta</b>'+d.h+'</div>'+
-  '<div class="row"><b>Qué revisa</b>'+d.r+'</div>'+
-  '<div class="row fail"><b>Si falla</b>'+d.f+'</div></div></div>';
-  flow.appendChild(li);nodes.push(li);
-});
-var RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-var hasG=typeof gsap!=='undefined';
-function setOpen(li,open,animate){
-  var det=li.querySelector('.det'),b=li.querySelector('.btn');
-  li.classList.toggle('open',open);b.setAttribute('aria-expanded',open);
-  if(open)li.classList.add('lit');
-  var target=open?det.firstChild.offsetHeight:0;
-  if(hasG&&animate&&!RM){gsap.to(det,{height:target,duration:.35,ease:'power2.out',onComplete:function(){if(open)det.style.height='auto'}});}
-  else det.style.height=open?'auto':'0px';
-  setTimeout(syncFill,animate&&!RM?400:0);
-}
-nodes.forEach(function(li){
-  li.querySelector('.btn').addEventListener('click',function(){
-    var was=li.classList.contains('open');
-    nodes.forEach(function(o){if(o!==li&&o.classList.contains('open'))setOpen(o,false,true)});
-    setOpen(li,!was,true);
-    if(!was&&hasG&&!RM)gsap.fromTo(li.querySelector('.num'),{scale:1.25},{scale:1,duration:.4,ease:'back.out(3)'});
+(function(){
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var reduced = function(){ return RM.matches; };
+  var $ = function(s,r){ return (r||document).querySelector(s); };
+  var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+  var pad = function(n){ return (n<10?'0':'')+n; };
+
+  /* ---------- build timeline ---------- */
+  var durs = [38,44,31,52,40,35,47,29,42,50,36,41,33,45,39,48,30,43,37,46];
+  var REPEAT = {6:true, 13:true}; // guiones 07 y 14: Juan los dijo dos veces
+  var TOTAL = 872;
+  var track = $('#track');
+  var pieces = []; // {el, ad, takeB}
+  function wave(seed){
+    var d='M0 50', x, h, n=24;
+    var pts=[];
+    for(var i=0;i<=n;i++){ x=i*(100/n); h=12+Math.abs(Math.sin(seed*3.1+i*1.7)*Math.cos(i*.9+seed))*30; pts.push([x,h]); }
+    d='M0 50'; pts.forEach(function(p){ d+=' L'+p[0].toFixed(1)+' '+(50-p[1]).toFixed(1); });
+    for(var j=pts.length-1;j>=0;j--){ d+=' L'+pts[j][0].toFixed(1)+' '+(50+pts[j][1]).toFixed(1); }
+    return '<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="'+d+' Z"/></svg>';
+  }
+  durs.forEach(function(d,i){
+    if(REPEAT[i]){
+      var b=document.createElement('div'); b.className='seg take-b'; b.style.setProperty('--d',Math.round(d*.9));
+      b.innerHTML=wave(i+40)+'<span class="lbl">'+pad(i+1)+'a</span>'; track.appendChild(b);
+      pieces.push({el:b, ad:i, takeB:true});
+    }
+    var s=document.createElement('div'); s.className='seg'; s.style.setProperty('--d',d);
+    s.innerHTML=wave(i)+'<span class="lbl">'+pad(i+1)+(REPEAT[i]?'b':'')+'</span>'; track.appendChild(s);
+    pieces.push({el:s, ad:i, takeB:false});
   });
-});
-var fill=document.getElementById('fill'),rail=fill.parentNode,dot=document.getElementById('dot');
-function numY(i){return nodes[i].offsetTop+32-rail.offsetTop}
-function syncFill(){
-  if(window.__playing)return;
-  var last=-1;nodes.forEach(function(n,i){if(n.classList.contains('lit'))last=i});
-  fill.style.height=(last<0?0:numY(last))+'px';
-}
-window.addEventListener('resize',function(){nodes.forEach(function(n){var d=n.querySelector('.det');if(n.classList.contains('open'))d.style.height='auto'});syncFill()});
-// Recorrido de carga
-function intro(){
-  if(!hasG||RM){nodes.forEach(function(n){n.classList.add('lit')});window.__playing=false;fill.style.height=numY(nodes.length-1)+'px';return}
-  window.__playing=true;
-  gsap.set(nodes,{opacity:0,y:18});gsap.set(dot,{opacity:1,y:numY(0)-6});
-  var tl=gsap.timeline({onComplete:function(){window.__playing=false;gsap.to(dot,{opacity:0,duration:.4});}});
-  nodes.forEach(function(n,i){
-    var y=numY(i);
-    tl.to(fill,{height:y,duration:.28,ease:'none'},i*.28)
-      .to(dot,{y:y-6,duration:.28,ease:'none'},i*.28)
-      .to(n,{opacity:1,y:0,duration:.35,ease:'power2.out'},i*.28)
-      .add(function(){n.classList.add('lit')},i*.28+.1);
+  var keep = pieces.filter(function(p){return !p.takeB;}).map(function(p){return p.el;});
+
+  /* ---------- docks + files ---------- */
+  var stations = $$('.st');
+  var docks = stations.map(function(st){
+    var d=$('.dock',st); for(var i=0;i<20;i++){ var s=document.createElement('span'); s.className='slot'; d.appendChild(s); }
+    return $$('.slot',d);
   });
-}
-function start(){
-  // posiciones listas tras cargar fuentes
-  intro();
-  // abre el paso 3 como invitación
-  setTimeout(function(){setOpen(nodes[2],true,true)},RM||!hasG?0:nodes.length*280+500);
-}
-(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(start);
+  var counters = stations.map(function(st){ return $('.ct b',st); });
+  var files = $('#files'), fileEls=[];
+  for(var f=0;f<20;f++){ var li=document.createElement('li'); li.textContent='anuncio-'+pad(f+1)+'.mp4'; files.appendChild(li); fileEls.push(li); }
+
+  /* ---------- detail panels ---------- */
+  var panels = $$('.panel');
+  var userPicked = false;
+  function show(i){
+    panels.forEach(function(p,k){ p.hidden = k!==i; });
+    stations.forEach(function(s,k){ s.setAttribute('aria-pressed', k===i?'true':'false'); });
+  }
+  show(0);
+  var hoverT;
+  stations.forEach(function(st,i){
+    st.addEventListener('click',function(){ userPicked = running; show(i);
+      if(window.innerWidth<1100){ var d=$('#detail'), r=d.getBoundingClientRect(); if(r.top>window.innerHeight*.6||r.top<0) d.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'}); }
+    });
+    st.addEventListener('mouseenter',function(){ if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return; clearTimeout(hoverT); hoverT=setTimeout(function(){ show(i); if(running) userPicked=true; },160); });
+    st.addEventListener('mouseleave',function(){ clearTimeout(hoverT); });
+  });
+
+  /* ---------- simulation ---------- */
+  var bay=$('#bay'), log=$('#log'), ph=$('#playhead'), tc=$('#tcNow'), drive=$('#drive');
+  var runBtns=$$('[data-run]'), running=false, runId=0;
+  function chip(name,on){ var c=$('.chip[data-o="'+name+'"]'); if(c) c.classList.toggle('hot',!!on); }
+  function say(html){ log.innerHTML=html; }
+  function sleep(ms,id){ return new Promise(function(res,rej){ setTimeout(function(){ id!==runId?rej('x'):res(); }, reduced()? Math.min(ms,120) : ms); }); }
+  function setActive(i){
+    stations.forEach(function(s,k){ s.classList.toggle('active',k===i); if(k<i) s.classList.add('done'); });
+    if(!userPicked && i>=0) show(Math.min(i,stations.length-1));
+  }
+  function bump(i){ counters[i].textContent = (+counters[i].textContent)+1; }
+  function rel(el){ var r=el.getBoundingClientRect(), b=bay.getBoundingClientRect(); return {x:r.left-b.left, y:r.top-b.top, w:r.width, h:r.height}; }
+
+  function fly(fromEl,toEl,cls,delay,id){
+    return new Promise(function(res){
+      setTimeout(function(){
+        if(id!==runId) return res();
+        if(reduced()){ return res(); }
+        var a=rel(fromEl), z=rel(toEl), g=document.createElement('span');
+        g.className='ghost '+(cls||''); g.style.width=a.w+'px'; g.style.height=a.h+'px';
+        bay.appendChild(g);
+        var mx=(a.x+z.x)/2, my=Math.min(a.y,z.y)-30;
+        var anim=g.animate([
+          {transform:'translate('+a.x+'px,'+a.y+'px)', width:a.w+'px', height:a.h+'px'},
+          {transform:'translate('+mx+'px,'+my+'px)', width:(a.w+z.w)/2+'px', height:(a.h+z.h)/2+'px', offset:.45},
+          {transform:'translate('+z.x+'px,'+z.y+'px)', width:z.w+'px', height:z.h+'px'}
+        ],{duration:760,easing:'cubic-bezier(.55,0,.25,1)',fill:'forwards'});
+        anim.onfinish=function(){ g.remove(); res(); };
+        anim.oncancel=function(){ g.remove(); res(); };
+      }, reduced()? delay*.3 : delay);
+    });
+  }
+  function hop(from,toIdx,cls,id,onLand){
+    var stag=36;
+    return Promise.all(from.map(function(el,k){
+      return fly(el,docks[toIdx][k],cls,k*stag,id).then(function(){
+        if(id!==runId) return;
+        docks[toIdx][k].classList.add('on'); bump(toIdx); if(onLand) onLand(k);
+      });
+    }));
+  }
+
+  function reset(){
+    $$('.ghost',bay).forEach(function(g){g.remove();});
+    pieces.forEach(function(p){ p.el.classList.remove('heard','drop','gone'); });
+    track.classList.remove('split');
+    docks.forEach(function(d){ d.forEach(function(s){ s.className='slot'; }); });
+    counters.forEach(function(c){ c.textContent='0'; });
+    stations.forEach(function(s){ s.classList.remove('active','done'); });
+    fileEls.forEach(function(li){ li.classList.remove('in','flash'); });
+    drive.classList.remove('full'); $('#driveCount').textContent='0 de 20 archivos';
+    $('#driveNote').textContent='La carpeta se llena cuando un anuncio pasa la revisión.';
+    ph.style.transition='none'; ph.style.left='0'; tc.textContent='00:00';
+    ['skills','sub','wf','hooks','cron'].forEach(function(n){chip(n,false);});
+    userPicked=false;
+  }
+
+  function transcribe(id){
+    return new Promise(function(res,rej){
+      var dur = reduced()? 900 : 3600, t0=performance.now();
+      var w = track.getBoundingClientRect().width;
+      bay.classList.add('transcribing');
+      var edges=[], acc=0, tw=pieces.reduce(function(s,p){return s+(+p.el.style.getPropertyValue('--d'));},0);
+      pieces.forEach(function(p){ acc+= +p.el.style.getPropertyValue('--d'); edges.push(acc/tw); });
+      var heard=0, found=0;
+      (function tick(now){
+        if(id!==runId){ return rej('x'); }
+        var k=Math.min(1,(now-t0)/dur);
+        ph.style.left=(k*w)+'px';
+        var secs=Math.round(k*TOTAL); tc.textContent=pad(Math.floor(secs/60))+':'+pad(secs%60);
+        while(heard<pieces.length && edges[heard]<=k+1e-6){
+          var p=pieces[heard]; p.el.classList.add('heard');
+          if(p.takeB){ say('<span class="k">Guion '+pad(p.ad+1)+':</span> Juan lo dijo dos veces. Gemini compara las dos tomas.'); }
+          else { docks[0][found].classList.add('on'); bump(0); found++;
+            if(!REPEAT[p.ad]) say('<span class="k">Guion '+pad(p.ad+1)+'</span> encontrado en '+pad(Math.floor(secs/60))+':'+pad(secs%60)+'. Inicio y fin marcados por palabra.');
+            else say('<span class="k">Guion '+pad(p.ad+1)+':</span> se queda la segunda toma, sin trabarse.');
+          }
+          heard++;
+        }
+        if(k<1) requestAnimationFrame(tick); else res();
+      })(t0);
+    });
+  }
+
+  async function run(){
+    var id=++runId; running=true; reset();
+    runBtns.forEach(function(b){ b.disabled=true; $('.rl',b).textContent='Corriendo…'; });
+    bay.classList.add('running');
+    try{
+      chip('skills',true); chip('wf',true);
+      setActive(0); say('Transcribiendo con tiempo por palabra…');
+      await transcribe(id);
+      bay.classList.remove('transcribing');
+      await sleep(300,id);
+
+      setActive(1); chip('sub',true);
+      say('Cortando los 20 contra su guion. Las tomas repetidas que perdieron se descartan.');
+      pieces.forEach(function(p){ if(p.takeB) p.el.classList.add('drop'); });
+      track.classList.add('split');
+      await sleep(750,id);
+      await hop(keep,1,'',id);
+      keep.forEach(function(el){ el.classList.add('drop'); });
+      await sleep(250,id);
+
+      var steps=[
+        [2,'',     'Quitando silencios y muletillas, nivelando el audio con loudnorm.'],
+        [3,'v',    'Pasando a 9:16 con la cara de Juan al centro.'],
+        [4,'v',    'Subtítulos palabra por palabra, zooms, color, música y sonido.'],
+        [5,'v fx', 'Recortando a Juan y metiendo la animación detrás.']
+      ];
+      for(var s=0;s<steps.length;s++){
+        var st=steps[s]; setActive(st[0]); say(st[2]);
+        await hop(docks[st[0]-1],st[0],st[1],id);
+        await sleep(220,id);
+      }
+
+      // revisión: uno falla y se rehace
+      setActive(6); chip('hooks',true);
+      say('Revisando imagen, audio, subtítulos contra guion, encuadre y duración…');
+      var FAIL=11;
+      await hop(docks[5],6,'fx',id,function(k){
+        if(k===FAIL){ docks[6][k].classList.add('bad'); counters[6].textContent=(+counters[6].textContent)-1; }
+        else docks[6][k].classList.add('ok');
+      });
+      say('<span class="k" style="color:var(--bad)">Anuncio 12:</span> un subtítulo no coincide con el guion. El hook lo bloquea y se rehace.');
+      await sleep(900,id);
+      docks[6][FAIL].classList.remove('bad');
+      await fly(docks[6][FAIL],docks[4][FAIL],'bad',0,id);
+      docks[4][FAIL].classList.add('retry');
+      await sleep(500,id);
+      await fly(docks[4][FAIL],docks[6][FAIL],'fx',0,id);
+      docks[6][FAIL].classList.add('ok'); bump(6);
+      say('<span class="k">Anuncio 12</span> corregido y aprobado. 20 de 20 pasan la revisión.');
+      await sleep(600,id);
+
+      // entregar
+      setActive(7); chip('hooks',false);
+      say('Subiendo a Drive con nombre claro, un archivo por anuncio.');
+      var n=0;
+      await Promise.all(docks[6].map(function(el,k){
+        return fly(el,fileEls[k],'ok',k*70,id).then(function(){
+          if(id!==runId) return;
+          docks[7][k].classList.add('on'); bump(7);
+          fileEls[k].classList.add('in','flash'); n++;
+          $('#driveCount').textContent=n+' de 20 archivos';
+          setTimeout(function(){ fileEls[k].classList.remove('flash'); },500);
+        });
+      }));
+      setActive(8);
+      drive.classList.add('full');
+      $('#driveCount').textContent='20 de 20 listos para aprobar';
+      $('#driveNote').textContent='Opcional: subirlos a Meta como anuncios en pausa, o programarlos con Upload-Post o Zernio.';
+      say('<b>Listo.</b> 20 anuncios verticales, con subtítulos y efecto, revisados y en Drive para aprobar.');
+      ['skills','sub','wf'].forEach(function(n){chip(n,false);});
+    }catch(e){ if(e!=='x') throw e; return; }
+    finally{
+      if(id===runId){
+        running=false; bay.classList.remove('running','transcribing');
+        runBtns.forEach(function(b){ b.disabled=false; $('.rl',b).textContent='Correr otra vez'; });
+      }
+    }
+  }
+
+  // estado inicial (con JS): carpeta vacía
+  $('#driveCount').textContent='0 de 20 archivos';
+  $('#driveNote').textContent='La carpeta se llena cuando un anuncio pasa la revisión.';
+
+  runBtns.forEach(function(b){ b.addEventListener('click',function(){
+    var r=bay.getBoundingClientRect();
+    if(r.top>window.innerHeight*.5 || r.top < -40) bay.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'});
+    setTimeout(run, reduced()?0:350);
+  }); });
+
+  /* ---------- before/after ---------- */
+  var screen=$('#screen'), cmp=$('#cmp'), tg=$$('.fx-toggle button');
+  function setPos(v){ screen.style.setProperty('--pos',v+'%'); cmp.value=v; tg.forEach(function(b){ b.setAttribute('aria-pressed', String(+b.dataset.pos===+v)); }); }
+  cmp.addEventListener('input',function(){ setPos(cmp.value); });
+  tg.forEach(function(b){ b.addEventListener('click',function(){ setPos(b.dataset.pos); }); });
+  $$('input[name=route]').forEach(function(r){ r.addEventListener('change',function(){ if(r.checked) screen.dataset.route=r.value; }); });
+  var words=$$('#cap .w'), wi=0;
+  if(!reduced()) setInterval(function(){ words.forEach(function(w,k){ w.classList.toggle('on',k===wi); }); wi=(wi+1)%words.length; },520);
+
+  // para pruebas: ?autorun
+  if(/[?&]autorun/.test(location.search)) setTimeout(run,200);
+})();
 </script>
 </body>
 </html>
