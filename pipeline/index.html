@@ -333,7 +333,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
     </li>
     <li class="nd t-auto" data-id="sy">
       <button class="nb" type="button"><span class="row"><span class="tg">Arranca solo</span></span><span class="tt">Detecta el video y lo baja</span><span class="sm"></span></button>
-      <div class="more"><p>Cloudflare revisa la carpeta de Drive cada minuto. Cuando llega el video, deja el trabajo en una cola. Mi computadora lo toma, baja los archivos y arranca Claude Code sola, sin que nadie escriba nada.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Cloudflare Workers</span><span class="tool">Cola de Cloudflare</span><span class="tool">API de Google Drive</span><span class="tool">Claude Code sin intervención</span></div></div>
+      <div class="more"><p>Una automatización revisa la carpeta de Drive cada minuto. Cuando llega el video, avisa a mi computadora. Mi computadora baja los archivos y arranca Claude Code sola, sin que nadie escriba nada.</p><span class="h">Herramientas</span><div class="tools"><span class="tool">Cloudflare Workers</span><span class="tool">Cola de Cloudflare</span><span class="tool">API de Google Drive</span><span class="tool">Claude Code sin intervención</span></div></div>
     </li>
 
     <li class="nd t-auto" data-id="cc">
@@ -435,7 +435,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
     <h2 id="laneT">Quién hace qué</h2>
     <div class="lanes">
       <div class="lane"><h3>Equipo Mercatitlán</h3><ul><li>Deja el video de Juan y los 20 guiones en una carpeta de Drive.</li><li>Al final, revisa y aprueba los 20 anuncios.</li></ul></div>
-      <div class="lane auto"><h3>Claude Code, en mi computadora</h3><ul><li>Cloudflare detecta el video en Drive y mi computadora lo baja sola.</li><li>Claude Code hace los pasos 1 a 8 con los 20 al mismo tiempo.</li><li>Reviso los 20 y, al aprobarlos, se guardan con su nombre en la carpeta de Drive. Si algo falla, lo dice y no lo entrega.</li></ul></div>
+      <div class="lane auto"><h3>Claude Code, en mi computadora</h3><ul><li>Una automatización detecta el video en Drive y mi computadora lo baja sola.</li><li>Claude Code hace los pasos 1 a 8 con los 20 al mismo tiempo.</li><li>Reviso los 20 y, al aprobarlos, se guardan con su nombre en la carpeta de Drive. Si algo falla, lo dice y no lo entrega.</li></ul></div>
     </div>
   </section>
 
@@ -606,7 +606,7 @@ document.addEventListener('DOMContentLoaded', function(){
     R.file={}; R.clips=[]; for(var k=0;k<20;k++) R.clips.push({k:k,sch:schedule(k,TS+k*GAP),passed:'s1',red:false});
     var ev=[
       [0,function(){ nodes.in.classList.add('hit','done'); say('El equipo deja el video de Juan y los 20 guiones en la carpeta de Drive.'); }],
-      [600,function(){ say('Cloudflare detecta el video y mi computadora lo baja.'); }],
+      [600,function(){ say('Una automatización detecta el video y mi computadora lo baja.'); }],
       [1300,function(){ nodes.sy.classList.add('done'); hit('sy'); }],
       [1500,function(){ say('<b>Claude Code</b> arranca 20 subagentes en paralelo, uno por anuncio.'); chip('sub',true); chip('skills',true); nodes.cc.classList.add('done'); }],
       [SWEEP0,function(){ say('<b>Paso 1:</b> transcribo con tiempos por palabra y ubico los 20 guiones.'); nodes.s1.classList.add('hit'); }]
